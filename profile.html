@@ -2,83 +2,5108 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>حسابي - Tofaa Quiz 🎮</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+    <title>Tofaa Quiz - الملف الشخصي</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0F172A;
+            color: #F8FAFC;
+            min-height: 100vh;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: #1E293B;
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #334155;
+            transform: translateY(-2px);
+        }
+
+        .card {
+            background: #1E293B;
+            border-radius: 22px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        /* ================= VIP PROFILE ================= */
+
+        body.vip-profile .card {
+            border-color: rgba(124, 58, 237, 0.45);
+
+            box-shadow:
+                0 0 30px rgba(124, 58, 237, 0.12),
+                0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        body.vip-profile h1 {
+            color: #C084FC;
+        }
+
+        h1 {
+            text-align: center;
+            color: #22D3EE;
+            margin-bottom: 8px;
+            transition: 0.3s;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #94A3B8;
+            margin-bottom: 25px;
+        }
+
+        /* ================= PROFILE AVATAR ================= */
+
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7C3AED,
+                    #22D3EE
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 42px;
+
+            box-shadow:
+                0 0 25px rgba(124, 58, 237, 0.3);
+
+            transition: 0.3s;
+        }
+
+        body.vip-profile .profile-avatar {
+            box-shadow:
+                0 0 0 3px #7C3AED,
+                0 0 25px rgba(124, 58, 237, 0.5),
+                0 0 50px rgba(124, 58, 237, 0.2);
+        }
+
+        /* ================= PURPLE FRAME ================= */
+
+        .profile-avatar.purple-frame {
+            border: 5px solid #7C3AED;
+
+            box-shadow:
+                0 0 15px rgba(124, 58, 237, 0.7),
+                0 0 35px rgba(124, 58, 237, 0.35);
+        }
+
+        /* ================= PROFILE NAME ================= */
+
+        .profile-name {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        body.vip-profile .profile-name {
+            color: #C084FC;
+        }
+
+        /* ================= BADGES ================= */
+
+        .king-badge,
+        .lightning-badge,
+        .vip-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .king-badge {
+            filter:
+                drop-shadow(
+                    0 0 5px
+                    rgba(250, 204, 21, 0.5)
+                );
+
+            animation: kingGlow 2s infinite;
+        }
+
+        @keyframes kingGlow {
+
+            0% {
+                transform: scale(1);
+
+                filter:
+                    drop-shadow(
+                        0 0 4px
+                        rgba(250, 204, 21, 0.35)
+                    );
+            }
+
+            50% {
+                transform: scale(1.08);
+
+                filter:
+                    drop-shadow(
+                        0 0 10px
+                        rgba(250, 204, 21, 0.7)
+                    );
+            }
+
+            100% {
+                transform: scale(1);
+
+                filter:
+                    drop-shadow(
+                        0 0 4px
+                        rgba(250, 204, 21, 0.35)
+                    );
+            }
+        }
+
+        .lightning-badge {
+
+            filter:
+                drop-shadow(
+                    0 0 5px
+                    rgba(34, 211, 238, 0.5)
+                );
+
+            animation:
+                lightningGlow 1.5s infinite;
+        }
+
+        @keyframes lightningGlow {
+
+            0% {
+                transform: scale(1);
+
+                filter:
+                    drop-shadow(
+                        0 0 4px
+                        rgba(34, 211, 238, 0.35)
+                    );
+            }
+
+            50% {
+                transform: scale(1.1);
+
+                filter:
+                    drop-shadow(
+                        0 0 12px
+                        rgba(34, 211, 238, 0.8)
+                    );
+            }
+
+            100% {
+                transform: scale(1);
+
+                filter:
+                    drop-shadow(
+                        0 0 4px
+                        rgba(34, 211, 238, 0.35)
+                    );
+            }
+        }
+
+        .vip-badge {
+
+            filter:
+                drop-shadow(
+                    0 0 5px
+                    rgba(167, 139, 250, 0.6)
+                );
+
+            animation:
+                vipGlow 2s infinite;
+        }
+
+        @keyframes vipGlow {
+
+            0% {
+                transform: scale(1);
+
+                filter:
+                    drop-shadow(
+                        0 0 4px
+                        rgba(167, 139, 250, 0.4)
+                    );
+            }
+
+            50% {
+                transform: scale(1.1);
+
+                filter:
+                    drop-shadow(
+                        0 0 14px
+                        rgba(167, 139, 250, 0.9)
+                    );
+            }
+
+            100% {
+                transform: scale(1);
+
+                filter:
+                    drop-shadow(
+                        0 0 4px
+                        rgba(167, 139, 250, 0.4)
+                    );
+            }
+        }
+
+        /* ================= EMAIL ================= */
+
+        .email {
+            text-align: center;
+            color: #94A3B8;
+            margin-bottom: 15px;
+        }
+
+        /* ================= ACCOUNT / VIP STATUS ================= */
+
+        .account-badge {
+
+            width: fit-content;
+            margin: 0 auto 15px;
+
+            padding: 7px 14px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(34, 197, 94, 0.12);
+
+            border:
+                1px solid
+                rgba(34, 197, 94, 0.3);
+
+            color: #86EFAC;
+
+            font-size: 13px;
+        }
+
+        .vip-status {
+
+            width: fit-content;
+            margin: 0 auto 20px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 10px 18px;
+
+            border-radius: 15px;
+
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .vip-active {
+
+            color: #F8FAFC;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7C3AED,
+                    #9333EA,
+                    #A855F7
+                );
+
+            border:
+                1px solid #C084FC;
+
+            box-shadow:
+                0 0 20px
+                rgba(124, 58, 237, 0.35);
+        }
+
+        .vip-normal {
+
+            color: #94A3B8;
+
+            background: #0F172A;
+
+            border:
+                1px solid #334155;
+        }
+
+        /* ================= STORE BUTTON ================= */
+
+        .store-profile-btn {
+
+            display: block;
+            width: 100%;
+
+            text-align: center;
+
+            background: #7C3AED;
+
+            color: #F8FAFC;
+
+            text-decoration: none;
+
+            padding: 13px 18px;
+
+            border-radius: 13px;
+
+            font-weight: bold;
+            font-size: 16px;
+
+            margin-bottom: 20px;
+
+            transition: 0.25s;
+        }
+
+        .store-profile-btn:hover {
+
+            background: #6D28D9;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(124, 58, 237, 0.25);
+        }
+
+        /* ================= COINS ================= */
+
+        .coins-card {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(34, 211, 238, 0.12),
+                    rgba(124, 58, 237, 0.12)
+                ),
+                #0F172A;
+
+            border:
+                1px solid
+                rgba(34, 211, 238, 0.25);
+
+            border-radius: 20px;
+
+            padding: 18px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+        }
+
+        .coins-icon {
+            font-size: 35px;
+            margin-bottom: 5px;
+        }
+
+        .coins-label {
+            color: #94A3B8;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .coins-value {
+            color: #22D3EE;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .coins-name {
+            color: #94A3B8;
+            font-size: 13px;
+            margin-right: 5px;
+        }
+
+        body.vip-profile .coins-card {
+
+            border-color:
+                rgba(167, 139, 250, 0.4);
+
+            box-shadow:
+                0 0 20px
+                rgba(124, 58, 237, 0.12);
+        }
+
+        /* ================= VIP REWARD ================= */
+
+        .vip-reward-box {
+
+            display: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124, 58, 237, 0.18),
+                    rgba(168, 85, 247, 0.08)
+                );
+
+            border:
+                1px solid
+                rgba(124, 58, 237, 0.35);
+
+            border-radius: 18px;
+
+            padding: 16px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+        }
+
+        .vip-reward-box.show {
+            display: block;
+        }
+
+        .vip-reward-title {
+
+            color: #C084FC;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+        .vip-reward-text {
+
+            color: #94A3B8;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        /* ================= EDIT PROFILE ================= */
+
+        .edit-profile {
+
+            margin-top: 20px;
+
+            background: #0F172A;
+
+            border:
+                1px solid #29384F;
+
+            border-radius: 20px;
+
+            padding: 20px;
+        }
+
+        .edit-title {
+
+            text-align: center;
+
+            font-size: 21px;
+
+            margin-bottom: 20px;
+        }
+
+        .edit-section {
+            margin-bottom: 22px;
+        }
+
+        .edit-label {
+
+            display: block;
+
+            color: #94A3B8;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+        }
+
+        .edit-input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border-radius: 12px;
+
+            border:
+                1px solid #334155;
+
+            background: #1E293B;
+
+            color: #F8FAFC;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+        .edit-input:focus {
+            border-color: #7C3AED;
+        }
+
+        /* ================= AVATAR GRID ================= */
+
+        .avatar-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 10px;
+        }
+
+        .avatar-option {
+
+            width: 100%;
+
+            aspect-ratio: 1;
+
+            border-radius: 50%;
+
+            border:
+                2px solid #334155;
+
+            background: #1E293B;
+
+            font-size: 30px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .avatar-option:hover {
+
+            transform: scale(1.08);
+
+            border-color: #7C3AED;
+        }
+
+        .avatar-option.selected {
+
+            border-color: #22D3EE;
+
+            box-shadow:
+                0 0 15px
+                rgba(34, 211, 238, 0.4);
+
+            transform: scale(1.08);
+        }
+
+        /* ================= SAVE BUTTON ================= */
+
+        .save-profile-btn {
+
+            width: 100%;
+
+            border: none;
+
+            background: #7C3AED;
+
+            color: white;
+
+            padding: 14px;
+
+            border-radius: 13px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .save-profile-btn:hover {
+
+            background: #6D28D9;
+
+            transform:
+                translateY(-2px);
+        }
+
+        .save-profile-btn:disabled {
+
+            opacity: 0.6;
+
+            cursor: default;
+
+            transform: none;
+        }
+
+        .password-message {
+
+            text-align: center;
+
+            margin-top: 10px;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+        .password-success {
+            color: #22C55E;
+        }
+
+        .password-error {
+            color: #EF4444;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 15px;
+        }
+
+        .stat {
+
+            background: #0F172A;
+
+            border-radius: 18px;
+
+            padding: 20px 10px;
+
+            text-align: center;
+
+            border:
+                1px solid transparent;
+
+            transition: 0.25s;
+        }
+
+        .stat:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color: #334155;
+        }
+
+        .icon {
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+        .value {
+
+            font-size: 26px;
+
+            font-weight: bold;
+
+            color: #22D3EE;
+        }
+
+        .title {
+
+            color: #94A3B8;
+
+            margin-top: 5px;
+        }
+
+        /* ================= CATEGORY STATS ================= */
+
+        .category-stats-card {
+
+            margin-top: 20px;
+
+            background: #0F172A;
+
+            border-radius: 20px;
+
+            padding: 20px;
+        }
+
+        .category-stats-title {
+
+            text-align: center;
+
+            font-size: 22px;
+
+            margin-bottom: 6px;
+        }
+
+        .category-stats-subtitle {
+
+            text-align: center;
+
+            color: #94A3B8;
+
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+
+        .category-stats-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 12px;
+        }
+
+        .category-stat {
+
+            background: #1E293B;
+
+            border:
+                1px solid #29384F;
+
+            border-radius: 16px;
+
+            padding: 15px;
+
+            transition: 0.25s;
+        }
+
+        .category-stat:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color: #7C3AED;
+        }
+
+        .category-stat-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 8px;
+
+            margin-bottom: 10px;
+        }
+
+        .category-stat-name {
+
+            font-size: 16px;
+
+            font-weight: bold;
+        }
+
+        .category-stat-icon {
+            font-size: 24px;
+        }
+
+        .category-stat-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 8px;
+
+            margin-top: 7px;
+
+            font-size: 13px;
+        }
+
+        .category-stat-label {
+            color: #94A3B8;
+        }
+
+        .category-stat-value {
+
+            color: #22D3EE;
+
+            font-weight: bold;
+        }
+
+        .category-empty {
+
+            text-align: center;
+
+            color: #94A3B8;
+
+            padding: 20px;
+
+            grid-column: 1 / -1;
+        }
+
+        /* ================= RANK ================= */
+
+        .rank-box {
+
+            margin-top: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7C3AED,
+                    #2563EB
+                );
+
+            border-radius: 18px;
+
+            padding: 20px;
+
+            text-align: center;
+        }
+
+        .rank-icon {
+            font-size: 35px;
+        }
+
+        .rank-number {
+
+            font-size: 32px;
+
+            font-weight: bold;
+
+            margin-top: 5px;
+        }
+
+        .rank-title {
+
+            margin-top: 5px;
+
+            color: #E2E8F0;
+        }
+
+        /* ================= XP ================= */
+
+        .xp-card {
+
+            margin-top: 20px;
+
+            background: #0F172A;
+
+            border-radius: 20px;
+
+            padding: 20px;
+        }
+
+        .xp-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 15px;
+        }
+
+        .xp-header h2 {
+
+            font-size: 20px;
+
+            margin-bottom: 6px;
+        }
+
+        .level-text {
+
+            color: #22D3EE;
+
+            font-size: 25px;
+
+            font-weight: bold;
+        }
+
+        .xp-number {
+
+            color: #94A3B8;
+
+            font-size: 14px;
+
+            white-space: nowrap;
+        }
+
+        .xp-bar {
+
+            width: 100%;
+
+            height: 14px;
+
+            background: #334155;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+        .xp-progress {
+
+            height: 100%;
+
+            width: 0%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7C3AED,
+                    #22D3EE
+                );
+
+            border-radius: 20px;
+
+            transition:
+                width 0.8s ease;
+        }
+
+        .next-level {
+
+            text-align: center;
+
+            color: #94A3B8;
+
+            margin-top: 10px;
+
+            font-size: 14px;
+        }
+
+        /* ================= DAILY ================= */
+
+        .daily-card {
+
+            margin-top: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(124, 58, 237, 0.22),
+                    rgba(34, 211, 238, 0.08)
+                ),
+                #0F172A;
+
+            border:
+                1px solid
+                rgba(124, 58, 237, 0.35);
+
+            border-radius: 22px;
+
+            padding: 20px;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .daily-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 130px;
+
+            height: 130px;
+
+            background: #7C3AED;
+
+            opacity: 0.08;
+
+            border-radius: 50%;
+
+            top: -60px;
+
+            left: -40px;
+        }
+
+        .daily-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .daily-title {
+
+            font-size: 22px;
+
+            font-weight: bold;
+        }
+
+        .streak-badge {
+
+            background:
+                rgba(239, 68, 68, 0.15);
+
+            border:
+                1px solid
+                rgba(239, 68, 68, 0.4);
+
+            color: #FCA5A5;
+
+            padding: 8px 12px;
+
+            border-radius: 12px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+        }
+
+        .daily-description {
+
+            color: #94A3B8;
+
+            margin-top: 12px;
+
+            line-height: 1.7;
+        }
+
+        .daily-stats {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+
+            margin-top: 15px;
+        }
+
+        .daily-stat {
+
+            background: #1E293B;
+
+            border-radius: 14px;
+
+            padding: 13px;
+
+            text-align: center;
+        }
+
+        .daily-stat-value {
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            color: #22D3EE;
+        }
+
+        .daily-stat-label {
+
+            color: #94A3B8;
+
+            font-size: 12px;
+
+            margin-top: 4px;
+        }
+
+        /* ================= BADGES ================= */
+
+        .badges-card {
+
+            margin-top: 20px;
+
+            background: #0F172A;
+
+            border-radius: 20px;
+
+            padding: 20px;
+        }
+
+        .badges-title {
+
+            text-align: center;
+
+            font-size: 22px;
+
+            margin-bottom: 6px;
+        }
+
+        .badges-subtitle {
+
+            text-align: center;
+
+            color: #94A3B8;
+
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+
+        .badges-counter {
+
+            text-align: center;
+
+            color: #22D3EE;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+        .badges-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 12px;
+        }
+
+        .badge {
+
+            background: #1E293B;
+
+            border:
+                2px solid #334155;
+
+            border-radius: 18px;
+
+            padding: 16px 10px;
+
+            text-align: center;
+
+            transition: 0.3s ease;
+        }
+
+        .badge.unlocked {
+
+            border-color: #7C3AED;
+
+            box-shadow:
+                0 0 15px
+                rgba(124, 58, 237, 0.25);
+
+            animation:
+                badgeGlow 2.5s infinite;
+        }
+
+        .badge.locked {
+
+            opacity: 0.38;
+
+            filter: grayscale(1);
+        }
+
+        .badge-icon {
+
+            font-size: 38px;
+
+            margin-bottom: 8px;
+        }
+
+        .badge-name {
+
+            font-size: 15px;
+
+            font-weight: bold;
+        }
+
+        .badge-description {
+
+            color: #94A3B8;
+
+            font-size: 12px;
+
+            margin-top: 5px;
+
+            line-height: 1.5;
+        }
+
+        .badge-status {
+
+            margin-top: 9px;
+
+            font-size: 12px;
+
+            color: #22C55E;
+
+            font-weight: bold;
+        }
+
+        .badge.locked .badge-status {
+            color: #94A3B8;
+        }
+
+        @keyframes badgeGlow {
+
+            0% {
+                box-shadow:
+                    0 0 8px
+                    rgba(124, 58, 237, 0.15);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 20px
+                    rgba(124, 58, 237, 0.35);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 8px
+                    rgba(124, 58, 237, 0.15);
+            }
+        }
+
+        /* ================= FRAMES ================= */
+
+        .frames-card {
+
+            margin-top: 20px;
+
+            background: #0F172A;
+
+            border-radius: 20px;
+
+            padding: 20px;
+        }
+
+        .frames-title {
+
+            text-align: center;
+
+            font-size: 22px;
+
+            margin-bottom: 6px;
+        }
+
+        .frames-subtitle {
+
+            text-align: center;
+
+            color: #94A3B8;
+
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+
+        .frames-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+        .frame-card {
+
+            background: #1E293B;
+
+            border:
+                1px solid #29384F;
+
+            border-radius: 18px;
+
+            padding: 18px 10px;
+
+            text-align: center;
+
+            transition: 0.25s;
+        }
+
+        .frame-card:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color: #7C3AED;
+        }
+
+        .frame-preview {
+
+            width: 75px;
+
+            height: 75px;
+
+            margin: 0 auto 12px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7C3AED,
+                    #22D3EE
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 35px;
+        }
+
+        .frame-preview.purple {
+
+            border:
+                5px solid #7C3AED;
+
+            box-shadow:
+                0 0 15px
+                rgba(124, 58, 237, 0.7),
+
+                0 0 35px
+                rgba(124, 58, 237, 0.35);
+        }
+
+        .frame-name {
+
+            font-weight: bold;
+
+            font-size: 15px;
+
+            margin-bottom: 6px;
+        }
+
+        .frame-status {
+
+            color: #22C55E;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .frame-locked {
+
+            color: #94A3B8;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        /* ================= WRONG QUESTIONS ================= */
+
+        .wrong-questions-card {
+
+            margin-top: 20px;
+
+            background: #0F172A;
+
+            border-radius: 20px;
+
+            padding: 20px;
+        }
+
+        .wrong-title {
+
+            text-align: center;
+
+            font-size: 22px;
+
+            margin-bottom: 6px;
+        }
+
+        .wrong-subtitle {
+
+            text-align: center;
+
+            color: #94A3B8;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 20px;
+        }
+
+        .wrong-counter {
+
+            text-align: center;
+
+            color: #EF4444;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+        .wrong-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .wrong-question {
+
+            background: #1E293B;
+
+            border:
+                1px solid #29384F;
+
+            border-right:
+                4px solid #EF4444;
+
+            border-radius: 16px;
+
+            padding: 16px;
+
+            transition: 0.25s;
+        }
+
+        .wrong-question:hover {
+
+            border-color: #EF4444;
+
+            transform:
+                translateY(-2px);
+        }
+
+        .wrong-question-title {
+
+            color: #F8FAFC;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            line-height: 1.7;
+
+            margin-bottom: 12px;
+        }
+
+        .wrong-meta {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+            margin-bottom: 12px;
+        }
+
+        .wrong-tag {
+
+            background: #0F172A;
+
+            border:
+                1px solid #334155;
+
+            color: #94A3B8;
+
+            padding: 5px 9px;
+
+            border-radius: 10px;
+
+            font-size: 11px;
+        }
+
+        .wrong-answer-box {
+
+            background:
+                rgba(239, 68, 68, 0.08);
+
+            border:
+                1px solid
+                rgba(239, 68, 68, 0.18);
+
+            border-radius: 12px;
+
+            padding: 10px;
+
+            margin-bottom: 10px;
+        }
+
+        .wrong-answer-label {
+
+            color: #FCA5A5;
+
+            font-size: 12px;
+
+            margin-bottom: 5px;
+
+            font-weight: bold;
+        }
+
+        .wrong-answer {
+
+            color: #F8FAFC;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+        .correct-answer-box {
+
+            background:
+                rgba(34, 197, 94, 0.08);
+
+            border:
+                1px solid
+                rgba(34, 197, 94, 0.18);
+
+            border-radius: 12px;
+
+            padding: 10px;
+
+            display: none;
+        }
+
+        .correct-answer-box.show {
+            display: block;
+        }
+
+        .correct-answer-label {
+
+            color: #86EFAC;
+
+            font-size: 12px;
+
+            margin-bottom: 5px;
+
+            font-weight: bold;
+        }
+
+        .correct-answer {
+
+            color: #F8FAFC;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+        .show-answer-btn {
+
+            width: 100%;
+
+            border: none;
+
+            background: #334155;
+
+            color: #F8FAFC;
+
+            padding: 10px;
+
+            border-radius: 11px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+
+            margin-top: 10px;
+        }
+
+        .show-answer-btn:hover {
+
+            background: #475569;
+        }
+
+        .wrong-empty {
+
+            text-align: center;
+
+            padding: 25px 15px;
+
+            color: #94A3B8;
+        }
+
+        .wrong-empty-icon {
+
+            font-size: 45px;
+
+            margin-bottom: 10px;
+        }
+
+        .wrong-empty-title {
+
+            color: #F8FAFC;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            margin-bottom: 6px;
+        }
+
+        .wrong-empty-text {
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        /* ================= LOGOUT ================= */
+
+        .logout {
+
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            background: #EF4444;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .logout:hover {
+
+            opacity: 0.9;
+
+            transform:
+                translateY(-2px);
+        }
+
+        /* ================= STATES ================= */
+
+        .loading {
+
+            text-align: center;
+
+            color: #94A3B8;
+
+            padding: 20px;
+        }
+
+        .error {
+
+            color: #EF4444;
+
+            text-align: center;
+
+            margin-top: 15px;
+        }
+
+        /* ================= ACHIEVEMENT POPUP ================= */
+
+        .achievement-popup {
+
+            position: fixed;
+
+            bottom: 25px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%)
+                translateY(120px);
+
+            background: #1E293B;
+
+            border:
+                1px solid #7C3AED;
+
+            padding: 14px 20px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 10px 35px
+                rgba(0, 0, 0, 0.45),
+
+                0 0 20px
+                rgba(124, 58, 237, 0.25);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            opacity: 0;
+
+            transition: 0.4s ease;
+
+            z-index: 9999;
+
+            white-space: nowrap;
+        }
+
+        .achievement-popup.show {
+
+            opacity: 1;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+        }
+
+        .achievement-popup-icon {
+            font-size: 32px;
+        }
+
+        .achievement-popup-title {
+
+            font-weight: bold;
+
+            color: #22D3EE;
+        }
+
+        .achievement-popup-text {
+
+            font-size: 12px;
+
+            color: #94A3B8;
+
+            margin-top: 3px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 500px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .stat {
+                padding: 16px 8px;
+            }
+
+            .value {
+                font-size: 22px;
+            }
+
+            .xp-header {
+
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+            .level-text {
+                font-size: 23px;
+            }
+
+            .daily-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .badges-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+                gap: 10px;
+            }
+
+            .badge {
+                padding: 14px 8px;
+            }
+
+            .badge-icon {
+                font-size: 32px;
+            }
+
+            .achievement-popup {
+
+                width:
+                    calc(100% - 30px);
+
+                white-space: normal;
+            }
+
+            .avatar-grid {
+                gap: 7px;
+            }
+
+            .avatar-option {
+                font-size: 25px;
+            }
+
+            .category-stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .frames-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .wrong-question {
+                padding: 14px;
+            }
+
+            .wrong-question-title {
+                font-size: 15px;
+            }
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-    <header>
+<div class="container">
 
-        <div class="logo">
-            Tofaa 🎮
-        </div>
+    <a
+        href="index.html"
+        class="back-btn">
 
-        <nav>
-            <a href="index.html">الرئيسية</a>
-            <a href="index.html#challenges">التحديات</a>
-            <a href="leaderboard.html">المتصدرين</a>
-        </nav>
+        ← الرئيسية
 
-        <a href="profile.html" class="profile">
-            👤 حسابي
-        </a>
+    </a>
 
-    </header>
+    <div class="card">
 
+        <h1>
+            👤 الملف الشخصي
+        </h1>
 
-    <main>
-
-        <section class="profile-page">
-
-            <div class="profile-icon">
-                👤
-            </div>
-
-            <h1>
-                حسابي
-            </h1>
-
-            <p>
-                أهلاً بيك في Tofaa Quiz 🎮
-            </p>
-
-
-            <div class="profile-stats">
-
-                <div>
-                    <strong>8</strong>
-                    <span>المستوى</span>
-                </div>
-
-                <div>
-                    <strong>1250</strong>
-                    <span>النقاط</span>
-                </div>
-
-                <div>
-                    <strong>24</strong>
-                    <span>الاختبارات</span>
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <footer>
-
-        <p>
-            © 2026 Tofaa Quiz 🎮
+        <p class="subtitle">
+            إحصائياتك في Tofaa Quiz
         </p>
 
-    </footer>
+        <div id="profileContent">
+
+            <div class="loading">
+                جاري تحميل الحساب...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Achievement Popup -->
+
+<div
+    id="achievementPopup"
+    class="achievement-popup">
+
+    <div
+        id="achievementPopupIcon"
+        class="achievement-popup-icon">
+
+        🏅
+
+    </div>
+
+    <div>
+
+        <div
+            id="achievementPopupTitle"
+            class="achievement-popup-title">
+
+            إنجاز جديد!
+
+        </div>
+
+        <div
+            id="achievementPopupText"
+            class="achievement-popup-text">
+
+            تم فتح شارة جديدة
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Firebase -->
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
+
+<script src="firebase.js"></script>
+
+
+<script>
+
+const profileContent =
+    document.getElementById("profileContent");
+
+
+let playerData = {
+
+    gamesCount: 0,
+
+    totalScore: 0,
+
+    highScore: 0,
+
+    bestCombo: 0,
+
+    totalXP: 0,
+
+    level: 1,
+
+    streak: 0,
+
+    totalDaily: 0,
+
+    coins: 0,
+
+    hasVIP: false
+
+};
+
+
+// ==========================================
+// تسجيل الدخول
+// ==========================================
+
+firebase.auth().onAuthStateChanged(
+    async function(user) {
+
+        if (!user) {
+
+            profileContent.innerHTML = `
+
+                <div class="loading">
+
+                    <h2>
+                        أنت غير مسجل الدخول
+                    </h2>
+
+                    <p style="margin-top:10px;">
+                        سجل الدخول أولًا عشان تشوف إحصائياتك.
+                    </p>
+
+                    <button
+                        onclick="window.location.href='login.html'"
+                        style="
+                            width:100%;
+                            margin-top:20px;
+                            padding:14px;
+                            border:none;
+                            border-radius:14px;
+                            background:#7C3AED;
+                            color:white;
+                            font-size:16px;
+                            cursor:pointer;
+                        "
+                    >
+                        تسجيل الدخول
+                    </button>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+        await buildProfile(user);
+
+    }
+);
+
+
+// ==========================================
+// بناء البروفايل
+// ==========================================
+
+async function buildProfile(user) {
+
+    let playerName =
+        user.displayName || "لاعب";
+
+    let userData = {};
+
+
+    // ==========================================
+    // جلب بيانات المستخدم
+    // ==========================================
+
+    try {
+
+        const userDoc =
+            await db
+                .collection("users")
+                .doc(user.uid)
+                .get();
+
+        if (userDoc.exists) {
+
+            userData =
+                userDoc.data();
+
+            if (userData.name) {
+
+                playerName =
+                    userData.name;
+
+            }
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "خطأ في تحميل بيانات اللاعب:",
+            error
+        );
+
+    }
+
+
+    // ==========================================
+    // العملات
+    // ==========================================
+
+    const coins =
+        Number(userData.coins) || 0;
+
+    playerData.coins =
+        coins;
+
+
+    // ==========================================
+    // الاسم والإيميل
+    // ==========================================
+
+    const safeName =
+        escapeHTML(playerName);
+
+    const safeEmail =
+        escapeHTML(user.email || "");
+
+
+    // ==========================================
+    // Purple Frame
+    // ==========================================
+
+    let hasPurpleFrame = false;
+
+    try {
+
+        const purpleFrameDoc =
+            await db
+                .collection("users")
+                .doc(user.uid)
+                .collection("purchases")
+                .doc("purple-frame")
+                .get();
+
+        hasPurpleFrame =
+            purpleFrameDoc.exists;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "خطأ في تحميل Purple Frame:",
+            error
+        );
+
+    }
+
+
+    // ==========================================
+    // King Badge
+    // ==========================================
+
+    let hasKingBadge = false;
+
+    try {
+
+        const kingBadgeDoc =
+            await db
+                .collection("users")
+                .doc(user.uid)
+                .collection("purchases")
+                .doc("king-badge")
+                .get();
+
+        hasKingBadge =
+            kingBadgeDoc.exists;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "خطأ في تحميل King Badge:",
+            error
+        );
+
+    }
+
+
+    // ==========================================
+    // Lightning Badge
+    // ==========================================
+
+    let hasLightningBadge = false;
+
+    try {
+
+        const lightningBadgeDoc =
+            await db
+                .collection("users")
+                .doc(user.uid)
+                .collection("purchases")
+                .doc("lightning-badge")
+                .get();
+
+        hasLightningBadge =
+            lightningBadgeDoc.exists;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "خطأ في تحميل Lightning Badge:",
+            error
+        );
+
+    }
+
+
+    // ==========================================
+    // VIP
+    // ==========================================
+
+    let hasVIP = false;
+
+    try {
+
+        const vipDoc =
+            await db
+                .collection("users")
+                .doc(user.uid)
+                .collection("purchases")
+                .doc("vip")
+                .get();
+
+        hasVIP =
+            vipDoc.exists;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "خطأ في تحميل VIP:",
+            error
+        );
+
+    }
+
+    playerData.hasVIP =
+        hasVIP;
+
+
+    // ==========================================
+    // تفعيل شكل VIP
+    // ==========================================
+
+    if (hasVIP) {
+
+        document.body.classList.add(
+            "vip-profile"
+        );
+
+    }
+
+
+    // ==========================================
+    // Avatar
+    // ==========================================
+
+    const avatar =
+        userData.avatar || "👤";
+
+
+    // ==========================================
+    // عرض البروفايل
+    // ==========================================
+
+    profileContent.innerHTML = `
+
+        <div
+            class="profile-avatar ${hasPurpleFrame ? "purple-frame" : ""}"
+            id="mainAvatar">
+
+            ${avatar}
+
+        </div>
+
+
+        <div class="profile-name">
+
+            ${hasVIP ? `
+
+                <span
+                    class="vip-badge"
+                    title="عضوية VIP">
+
+                    💎
+
+                </span>
+
+            ` : ""}
+
+
+            ${hasKingBadge ? `
+
+                <span
+                    class="king-badge"
+                    title="شارة الملك">
+
+                    👑
+
+                </span>
+
+            ` : ""}
+
+
+            ${hasLightningBadge ? `
+
+                <span
+                    class="lightning-badge"
+                    title="شارة البرق">
+
+                    ⚡
+
+                </span>
+
+            ` : ""}
+
+
+            <span>
+                ${safeName}
+            </span>
+
+        </div>
+
+
+        <div class="email">
+
+            ${safeEmail}
+
+        </div>
+
+
+        <!-- ================= تعديل البروفايل ================= -->
+
+        <div class="edit-profile">
+
+            <div class="edit-title">
+                ⚙️ تعديل الملف الشخصي
+            </div>
+
+
+            <div class="edit-section">
+
+                <label class="edit-label">
+                    الاسم
+                </label>
+
+                <input
+                    id="editName"
+                    class="edit-input"
+                    type="text"
+                    maxlength="30"
+                    value="${safeName}"
+                    placeholder="اكتب اسمك"
+                >
+
+            </div>
+
+
+            <div class="edit-section">
+
+                <label class="edit-label">
+                    اختر الـ Avatar
+                </label>
+
+
+                <div
+                    class="avatar-grid"
+                    id="avatarGrid">
+
+
+                    ${[
+                        "👾","🤖","🦊","🐼","🐸",
+                        "🦁","🐯","🐺","🦄","🐲",
+                        "👽","🎮","🧠","⚡","🔥",
+                        "👑","💎","🚀","🎯","⭐"
+                    ].map(function(item) {
+
+                        return `
+
+                            <button
+                                type="button"
+                                class="avatar-option"
+                                data-avatar="${item}">
+
+                                ${item}
+
+                            </button>
+
+                        `;
+
+                    }).join("")}
+
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="save-profile-btn"
+                id="saveProfileBtn">
+
+                💾 حفظ التغييرات
+
+            </button>
+
+        </div>
+
+
+        <!-- ================= تغيير كلمة السر ================= -->
+
+        <div class="edit-profile">
+
+            <div class="edit-title">
+                🔐 تغيير كلمة السر
+            </div>
+
+
+            <div class="edit-section">
+
+                <label class="edit-label">
+                    كلمة السر الحالية
+                </label>
+
+                <input
+                    id="currentPassword"
+                    class="edit-input"
+                    type="password"
+                    placeholder="كلمة السر الحالية"
+                >
+
+            </div>
+
+
+            <div class="edit-section">
+
+                <label class="edit-label">
+                    كلمة السر الجديدة
+                </label>
+
+                <input
+                    id="newPassword"
+                    class="edit-input"
+                    type="password"
+                    minlength="6"
+                    placeholder="6 أحرف على الأقل"
+                >
+
+            </div>
+
+
+            <button
+                class="save-profile-btn"
+                id="changePasswordBtn">
+
+                🔐 تغيير كلمة السر
+
+            </button>
+
+
+            <div
+                id="passwordMessage"
+                class="password-message">
+            </div>
+
+        </div>
+
+
+        <!-- ================= VIP ================= -->
+
+        <div
+            class="vip-status ${hasVIP ? "vip-active" : "vip-normal"}">
+
+            ${
+                hasVIP
+                    ? "💎 VIP مفعل"
+                    : "⭐ عضو عادي"
+            }
+
+        </div>
+
+
+        <!-- ================= STORE ================= -->
+
+        <a
+            href="store.html"
+            class="store-profile-btn">
+
+            🛍️ متجر Tofaa
+
+        </a>
+
+
+        <!-- ================= COINS ================= -->
+
+        <div class="coins-card">
+
+            <div class="coins-icon">
+                🪙
+            </div>
+
+            <div class="coins-label">
+                رصيد العملات
+            </div>
+
+            <div class="coins-value">
+
+                <span id="profileCoins">
+                    ${coins}
+                </span>
+
+                <span class="coins-name">
+                    عملة
+                </span>
+
+            </div>
+
+        </div>
+
+
+        ${
+            hasVIP
+                ? `
+
+            <div class="vip-reward-box show">
+
+                <div class="vip-reward-title">
+                    💎 مزايا VIP
+                </div>
+
+                <div class="vip-reward-text">
+
+                    تحصل على 4 عملات عند الإجابة الصحيحة
+                    و20 عملة عند إكمال اللعبة.
+
+                </div>
+
+            </div>
+
+        `
+                : ""
+        }
+
+
+        <!-- ================= ACCOUNT ================= -->
+
+        <div class="account-badge">
+            ✓ حساب مسجل
+        </div>
+
+
+        <!-- ================= STATS ================= -->
+
+        <div class="stats">
+
+
+            <div class="stat">
+
+                <div class="icon">
+                    🏆
+                </div>
+
+                <div
+                    class="value"
+                    id="highScore">
+                    0
+                </div>
+
+                <div class="title">
+                    أعلى نتيجة
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="icon">
+                    🎮
+                </div>
+
+                <div
+                    class="value"
+                    id="gamesCount">
+                    0
+                </div>
+
+                <div class="title">
+                    عدد الألعاب
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="icon">
+                    🔥
+                </div>
+
+                <div
+                    class="value"
+                    id="bestCombo">
+                    0
+                </div>
+
+                <div class="title">
+                    أفضل Combo
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="icon">
+                    💎
+                </div>
+
+                <div
+                    class="value"
+                    id="totalScore">
+                    0
+                </div>
+
+                <div class="title">
+                    مجموع النقاط
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= CATEGORY STATS ================= -->
+
+        <div class="category-stats-card">
+
+            <div class="category-stats-title">
+                📈 إحصائيات الأقسام
+            </div>
+
+            <div class="category-stats-subtitle">
+
+                أداؤك في كل قسم من أقسام Tofaa Quiz
+
+            </div>
+
+            <div
+                class="category-stats-grid"
+                id="categoryStatsGrid">
+
+                <div class="category-empty">
+                    جاري تحميل إحصائيات الأقسام...
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= RANK ================= -->
+
+        <div class="rank-box">
+
+            <div class="rank-icon">
+                🥇
+            </div>
+
+            <div
+                class="rank-number"
+                id="playerRank">
+                -
+            </div>
+
+            <div class="rank-title">
+                ترتيبك بين جميع اللاعبين
+            </div>
+
+        </div>
+
+
+        <!-- ================= XP ================= -->
+
+        <div class="xp-card">
+
+            <div class="xp-header">
+
+                <div>
+
+                    <h2>
+                        ⭐ المستوى
+                    </h2>
+
+                    <div
+                        class="level-text"
+                        id="levelText">
+                        المستوى 1
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="xp-number"
+                    id="xpText">
+                    0 / 100 XP
+                </div>
+
+            </div>
+
+
+            <div class="xp-bar">
+
+                <div
+                    class="xp-progress"
+                    id="xpProgress">
+                </div>
+
+            </div>
+
+
+            <div
+                class="next-level"
+                id="nextLevelText">
+
+                100 XP للمستوى التالي
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= DAILY ================= -->
+
+        <div class="daily-card">
+
+            <div class="daily-header">
+
+                <div class="daily-title">
+                    🎯 التحدي اليومي
+                </div>
+
+                <div
+                    class="streak-badge"
+                    id="streakBadge">
+
+                    🔥 Streak: 0
+
+                </div>
+
+            </div>
+
+
+            <div class="daily-description">
+
+                العب التحدي اليومي وحافظ على الـ Streak
+                بتسجيل تحدي كل يوم.
+
+            </div>
+
+
+            <div class="daily-stats">
+
+                <div class="daily-stat">
+
+                    <div
+                        class="daily-stat-value"
+                        id="dailyCompleted">
+                        0
+                    </div>
+
+                    <div class="daily-stat-label">
+                        تحديات مكتملة
+                    </div>
+
+                </div>
+
+
+                <div class="daily-stat">
+
+                    <div
+                        class="daily-stat-value"
+                        id="dailyStreak">
+                        0
+                    </div>
+
+                    <div class="daily-stat-label">
+                        أيام متتالية
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= BADGES ================= -->
+
+        <div class="badges-card">
+
+            <div class="badges-title">
+                🏅 الشارات والإنجازات
+            </div>
+
+            <div class="badges-subtitle">
+                حقق الإنجازات وافتح الشارات
+            </div>
+
+
+            <div
+                class="badges-counter"
+                id="badgesCounter">
+
+                0 / 10 شارات
+
+            </div>
+
+
+            <div
+                class="badges-grid"
+                id="badgesGrid">
+
+                جاري تحميل الشارات...
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= FRAMES ================= -->
+
+        <div class="frames-card">
+
+            <div class="frames-title">
+                🎨 الإطارات
+            </div>
+
+            <div class="frames-subtitle">
+
+                الإطارات التي حصلت عليها من متجر Tofaa
+
+            </div>
+
+
+            <div
+                class="frames-grid"
+                id="framesGrid">
+
+                جاري تحميل الإطارات...
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= WRONG QUESTIONS ================= -->
+
+        <div class="wrong-questions-card">
+
+            <div class="wrong-title">
+                🧠 الأسئلة التي أخطأت فيها
+            </div>
+
+            <div class="wrong-subtitle">
+
+                راجع أخطاءك وتعلم من الإجابات الصحيحة.
+
+            </div>
+
+
+            <div
+                class="wrong-counter"
+                id="wrongQuestionsCounter">
+
+                جاري تحميل الأسئلة...
+
+            </div>
+
+
+            <div
+                class="wrong-list"
+                id="wrongQuestionsList">
+
+                <div class="wrong-empty">
+
+                    جاري تحميل الأسئلة الغلط...
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= LOGOUT ================= -->
+
+        <button
+            class="logout"
+            id="logoutBtn">
+
+            تسجيل الخروج
+
+        </button>
+
+    `;
+
+
+    // ==========================================
+    // تحميل البيانات
+    // ==========================================
+
+    await loadAllData(user);
+
+
+    // ==========================================
+    // تشغيل تعديل البروفايل
+    // ==========================================
+
+    setupProfileEditing(
+        user,
+        userData
+    );
+
+
+    // ==========================================
+    // تسجيل الخروج
+    // ==========================================
+
+    const logoutBtn =
+        document.getElementById(
+            "logoutBtn"
+        );
+
+    if (logoutBtn) {
+
+        logoutBtn.addEventListener(
+            "click",
+            logout
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// تعديل الملف الشخصي
+// ==========================================
+
+function setupProfileEditing(
+    user,
+    userData
+) {
+
+    let selectedAvatar =
+        userData.avatar || "👤";
+
+
+    const avatarButtons =
+        document.querySelectorAll(
+            ".avatar-option"
+        );
+
+
+    avatarButtons.forEach(
+        function(button) {
+
+            if (
+                button.dataset.avatar ===
+                selectedAvatar
+            ) {
+
+                button.classList.add(
+                    "selected"
+                );
+
+            }
+
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    avatarButtons.forEach(
+                        function(item) {
+
+                            item.classList.remove(
+                                "selected"
+                            );
+
+                        }
+                    );
+
+
+                    button.classList.add(
+                        "selected"
+                    );
+
+
+                    selectedAvatar =
+                        button.dataset.avatar;
+
+                }
+            );
+
+        }
+    );
+
+
+    // ==========================================
+    // حفظ الاسم والـ Avatar
+    // ==========================================
+
+    const saveProfileBtn =
+        document.getElementById(
+            "saveProfileBtn"
+        );
+
+
+    if (saveProfileBtn) {
+
+        saveProfileBtn.addEventListener(
+            "click",
+            async function() {
+
+                const nameInput =
+                    document.getElementById(
+                        "editName"
+                    );
+
+
+                const newName =
+                    nameInput.value.trim();
+
+
+                if (!newName) {
+
+                    alert(
+                        "اكتب اسمك الأول"
+                    );
+
+                    return;
+
+                }
+
+
+                if (newName.length < 2) {
+
+                    alert(
+                        "الاسم لازم يكون حرفين على الأقل"
+                    );
+
+                    return;
+
+                }
+
+
+                saveProfileBtn.disabled =
+                    true;
+
+
+                saveProfileBtn.textContent =
+                    "⏳ جاري الحفظ...";
+
+
+                try {
+
+                    await user.updateProfile({
+
+                        displayName:
+                            newName
+
+                    });
+
+
+                    await db
+                        .collection("users")
+                        .doc(user.uid)
+                        .set({
+
+                            name:
+                                newName,
+
+                            displayName:
+                                newName,
+
+                            avatar:
+                                selectedAvatar
+
+                        }, {
+
+                            merge: true
+
+                        });
+
+
+                    const mainAvatar =
+                        document.getElementById(
+                            "mainAvatar"
+                        );
+
+
+                    if (mainAvatar) {
+
+                        mainAvatar.textContent =
+                            selectedAvatar;
+
+                    }
+
+
+                    const profileName =
+                        document.querySelector(
+                            ".profile-name span:last-child"
+                        );
+
+
+                    if (profileName) {
+
+                        profileName.textContent =
+                            newName;
+
+                    }
+
+
+                    alert(
+                        "✅ تم حفظ التغييرات"
+                    );
+
+                }
+
+
+                catch (error) {
+
+                    console.error(
+                        "خطأ في حفظ البروفايل:",
+                        error
+                    );
+
+
+                    alert(
+                        "حدث خطأ أثناء حفظ التغييرات"
+                    );
+
+                }
+
+
+                finally {
+
+                    saveProfileBtn.disabled =
+                        false;
+
+
+                    saveProfileBtn.textContent =
+                        "💾 حفظ التغييرات";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    // ==========================================
+    // تغيير كلمة السر
+    // ==========================================
+
+    const changePasswordBtn =
+        document.getElementById(
+            "changePasswordBtn"
+        );
+
+
+    if (changePasswordBtn) {
+
+        changePasswordBtn.addEventListener(
+            "click",
+            async function() {
+
+                const currentPassword =
+                    document.getElementById(
+                        "currentPassword"
+                    ).value;
+
+
+                const newPassword =
+                    document.getElementById(
+                        "newPassword"
+                    ).value;
+
+
+                const message =
+                    document.getElementById(
+                        "passwordMessage"
+                    );
+
+
+                if (!currentPassword) {
+
+                    message.className =
+                        "password-message password-error";
+
+                    message.textContent =
+                        "اكتب كلمة السر الحالية";
+
+                    return;
+
+                }
+
+
+                if (newPassword.length < 6) {
+
+                    message.className =
+                        "password-message password-error";
+
+                    message.textContent =
+                        "كلمة السر الجديدة لازم تكون 6 أحرف على الأقل";
+
+                    return;
+
+                }
+
+
+                if (
+                    currentPassword ===
+                    newPassword
+                ) {
+
+                    message.className =
+                        "password-message password-error";
+
+                    message.textContent =
+                        "كلمة السر الجديدة لازم تكون مختلفة عن القديمة";
+
+                    return;
+
+                }
+
+
+                changePasswordBtn.disabled =
+                    true;
+
+
+                changePasswordBtn.textContent =
+                    "⏳ جاري التغيير...";
+
+
+                try {
+
+                    const credential =
+                        firebase.auth.EmailAuthProvider
+                            .credential(
+                                user.email,
+                                currentPassword
+                            );
+
+
+                    await user
+                        .reauthenticateWithCredential(
+                            credential
+                        );
+
+
+                    await user.updatePassword(
+                        newPassword
+                    );
+
+
+                    document.getElementById(
+                        "currentPassword"
+                    ).value = "";
+
+
+                    document.getElementById(
+                        "newPassword"
+                    ).value = "";
+
+
+                    message.className =
+                        "password-message password-success";
+
+
+                    message.textContent =
+                        "✅ تم تغيير كلمة السر بنجاح";
+
+                }
+
+
+                catch (error) {
+
+                    console.error(
+                        "خطأ في تغيير كلمة السر:",
+                        error
+                    );
+
+
+                    message.className =
+                        "password-message password-error";
+
+
+                    if (
+                        error.code ===
+                        "auth/wrong-password"
+                    ) {
+
+                        message.textContent =
+                            "❌ كلمة السر الحالية غير صحيحة";
+
+                    }
+
+                    else if (
+                        error.code ===
+                        "auth/invalid-credential"
+                    ) {
+
+                        message.textContent =
+                            "❌ كلمة السر الحالية غير صحيحة";
+
+                    }
+
+                    else if (
+                        error.code ===
+                        "auth/weak-password"
+                    ) {
+
+                        message.textContent =
+                            "❌ كلمة السر الجديدة ضعيفة";
+
+                    }
+
+                    else if (
+                        error.code ===
+                        "auth/invalid-email"
+                    ) {
+
+                        message.textContent =
+                            "❌ البريد الإلكتروني غير صالح";
+
+                    }
+
+                    else {
+
+                        message.textContent =
+                            "❌ حدث خطأ أثناء تغيير كلمة السر";
+
+                    }
+
+                }
+
+
+                finally {
+
+                    changePasswordBtn.disabled =
+                        false;
+
+
+                    changePasswordBtn.textContent =
+                        "🔐 تغيير كلمة السر";
+
+                }
+
+            }
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// تحميل كل البيانات
+// ==========================================
+
+async function loadAllData(user) {
+
+    await loadStats(user);
+
+    // مهم: كانت ناقصة هنا
+    await loadCategoryStats(user);
+
+    await loadXP(user);
+
+    await loadDaily(user);
+
+    await loadBadges();
+
+    await loadFrames(user);
+
+    await loadWrongQuestions(user);
+
+}
+
+
+// ==========================================
+// إحصائيات الأقسام
+// ==========================================
+
+async function loadCategoryStats(user) {
+
+    const grid =
+        document.getElementById(
+            "categoryStatsGrid"
+        );
+
+    if (!grid) {
+        return;
+    }
+
+
+    try {
+
+        const snapshot =
+            await db
+                .collection("scores")
+                .where(
+                    "uid",
+                    "==",
+                    user.uid
+                )
+                .get();
+
+
+        const categories = {};
+
+
+        snapshot.forEach(
+            function(doc) {
+
+                const data =
+                    doc.data();
+
+
+                if (
+                    data.category ===
+                    "daily_reward"
+                ) {
+
+                    return;
+
+                }
+
+
+                // نستخدم quizCategory الجديد
+                // ونرجع category للسجلات القديمة
+
+                const category =
+                    data.quizCategory ||
+                    data.category ||
+                    "general";
+
+
+                if (
+                    category ===
+                    "daily_reward"
+                ) {
+
+                    return;
+
+                }
+
+
+                if (!categories[category]) {
+
+                    categories[category] = {
+
+                        games: 0,
+
+                        totalScore: 0,
+
+                        highScore: 0
+
+                    };
+
+                }
+
+
+                const score =
+                    Number(data.score) || 0;
+
+
+                categories[category].games++;
+
+
+                categories[category].totalScore +=
+                    score;
+
+
+                categories[category].highScore =
+                    Math.max(
+                        categories[category].highScore,
+                        score
+                    );
+
+            }
+        );
+
+
+        const categoryInfo = {
+
+            general: {
+                name: "معلومات عامة",
+                icon: "🧠"
+            },
+
+            science: {
+                name: "العلوم",
+                icon: "🔬"
+            },
+
+            geography: {
+                name: "الجغرافيا",
+                icon: "🌍"
+            },
+
+            history: {
+                name: "التاريخ",
+                icon: "📜"
+            },
+
+            math: {
+                name: "الرياضيات",
+                icon: "➗"
+            },
+
+            technology: {
+                name: "التكنولوجيا",
+                icon: "💻"
+            },
+
+            sports: {
+                name: "الرياضة",
+                icon: "⚽"
+            },
+
+            games: {
+                name: "الألعاب",
+                icon: "🎮"
+            },
+
+            movies: {
+                name: "الأفلام",
+                icon: "🎬"
+            },
+
+            music: {
+                name: "الموسيقى",
+                icon: "🎵"
+            },
+
+            english: {
+                name: "الإنجليزية",
+                icon: "🇬🇧"
+            },
+
+            riddles: {
+                name: "الألغاز",
+                icon: "🧩"
+            },
+
+            space: {
+                name: "الفضاء",
+                icon: "🚀"
+            },
+
+            animals: {
+                name: "الحيوانات",
+                icon: "🐾"
+            },
+
+            food: {
+                name: "الطعام",
+                icon: "🍔"
+            },
+
+            egypt: {
+                name: "مصر",
+                icon: "🇪🇬"
+            }
+
+        };
+
+
+        grid.innerHTML = "";
+
+
+        const categoryKeys =
+            Object.keys(categories);
+
+
+        if (categoryKeys.length === 0) {
+
+            grid.innerHTML = `
+
+                <div class="category-empty">
+
+                    لسه مفيش ألعاب مسجلة في الأقسام.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        categoryKeys.sort(
+            function(a, b) {
+
+                return categories[b].totalScore -
+                    categories[a].totalScore;
+
+            }
+        );
+
+
+        categoryKeys.forEach(
+            function(category) {
+
+                const stats =
+                    categories[category];
+
+
+                const info =
+                    categoryInfo[category] || {
+
+                        name: category,
+
+                        icon: "📚"
+
+                    };
+
+
+                const element =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                element.className =
+                    "category-stat";
+
+
+                element.innerHTML = `
+
+                    <div class="category-stat-header">
+
+                        <div class="category-stat-name">
+                            ${escapeHTML(info.name)}
+                        </div>
+
+                        <div class="category-stat-icon">
+                            ${info.icon}
+                        </div>
+
+                    </div>
+
+
+                    <div class="category-stat-row">
+
+                        <span class="category-stat-label">
+                            🎮 الألعاب
+                        </span>
+
+                        <span class="category-stat-value">
+                            ${stats.games}
+                        </span>
+
+                    </div>
+
+
+                    <div class="category-stat-row">
+
+                        <span class="category-stat-label">
+                            💎 مجموع النقاط
+                        </span>
+
+                        <span class="category-stat-value">
+                            ${stats.totalScore}
+                        </span>
+
+                    </div>
+
+
+                    <div class="category-stat-row">
+
+                        <span class="category-stat-label">
+                            🏆 أعلى نتيجة
+                        </span>
+
+                        <span class="category-stat-value">
+                            ${stats.highScore}
+                        </span>
+
+                    </div>
+
+                `;
+
+
+                grid.appendChild(
+                    element
+                );
+
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "خطأ في إحصائيات الأقسام:",
+            error
+        );
+
+
+        grid.innerHTML = `
+
+            <div class="category-empty">
+
+                ❌ حدث خطأ أثناء تحميل الإحصائيات.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// ==========================================
+// الإحصائيات
+// ==========================================
+
+async function loadStats(user) {
+
+    try {
+
+        const snapshot =
+            await db
+                .collection("scores")
+                .get();
+
+
+        const playerMap = {};
+
+
+        snapshot.forEach(
+            function(doc) {
+
+                const data =
+                    doc.data();
+
+
+                const uid =
+                    data.uid;
+
+
+                if (!uid) {
+                    return;
+                }
+
+
+                if (!playerMap[uid]) {
+
+                    playerMap[uid] = {
+                        score: 0
+                    };
+
+                }
+
+
+                playerMap[uid].score +=
+                    Number(data.score) || 0;
+
+            }
+        );
+
+
+        const players =
+            Object.entries(playerMap)
+                .map(
+                    function([uid, player]) {
+
+                        return {
+
+                            uid: uid,
+
+                            score: player.score
+
+                        };
+
+                    }
+                );
+
+
+        players.sort(
+            function(a, b) {
+
+                return b.score - a.score;
+
+            }
+        );
+
+
+        let gamesCount = 0;
+
+        let totalScore = 0;
+
+        let highScore = 0;
+
+        let bestCombo = 0;
+
+
+        snapshot.forEach(
+            function(doc) {
+
+                const data =
+                    doc.data();
+
+
+                if (
+                    data.uid !==
+                    user.uid
+                ) {
+
+                    return;
+
+                }
+
+
+                const isReward =
+                    data.category ===
+                    "daily_reward";
+
+
+                const score =
+                    Number(data.score) || 0;
+
+
+                const combo =
+                    Number(data.maxCombo) || 0;
+
+
+                totalScore +=
+                    score;
+
+
+                if (!isReward) {
+
+                    gamesCount++;
+
+
+                    highScore =
+                        Math.max(
+                            highScore,
+                            score
+                        );
+
+
+                    bestCombo =
+                        Math.max(
+                            bestCombo,
+                            combo
+                        );
+
+                }
+
+            }
+        );
+
+
+        const playerRank =
+            players.findIndex(
+                function(player) {
+
+                    return player.uid ===
+                        user.uid;
+
+                }
+            ) + 1;
+
+
+        playerData.gamesCount =
+            gamesCount;
+
+
+        playerData.totalScore =
+            totalScore;
+
+
+        playerData.highScore =
+            highScore;
+
+
+        playerData.bestCombo =
+            bestCombo;
+
+
+        const highScoreElement =
+            document.getElementById(
+                "highScore"
+            );
+
+
+        const gamesCountElement =
+            document.getElementById(
+                "gamesCount"
+            );
+
+
+        const bestComboElement =
+            document.getElementById(
+                "bestCombo"
+            );
+
+
+        const totalScoreElement =
+            document.getElementById(
+                "totalScore"
+            );
+
+
+        const playerRankElement =
+            document.getElementById(
+                "playerRank"
+            );
+
+
+        if (highScoreElement) {
+
+            highScoreElement.textContent =
+                highScore;
+
+        }
+
+
+        if (gamesCountElement) {
+
+            gamesCountElement.textContent =
+                gamesCount;
+
+        }
+
+
+        if (bestComboElement) {
+
+            bestComboElement.textContent =
+                bestCombo;
+
+        }
+
+
+        if (totalScoreElement) {
+
+            totalScoreElement.textContent =
+                totalScore;
+
+        }
+
+
+        if (playerRankElement) {
+
+            playerRankElement.textContent =
+                playerRank > 0
+                    ? "#" + playerRank
+                    : "-";
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "خطأ في الإحصائيات:",
+            error
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// XP
+// ==========================================
+
+async function loadXP(user) {
+
+    try {
+
+        const snapshot =
+            await db
+                .collection("scores")
+                .where(
+                    "uid",
+                    "==",
+                    user.uid
+                )
+                .get();
+
+
+        let totalXP = 0;
+
+
+        snapshot.forEach(
+            function(doc) {
+
+                const data =
+                    doc.data();
+
+
+                totalXP +=
+                    Number(data.xp) || 0;
+
+            }
+        );
+
+
+        const level =
+            Math.floor(
+                totalXP / 100
+            ) + 1;
+
+
+        const currentLevelXP =
+            totalXP % 100;
+
+
+        const xpNeeded =
+            100 - currentLevelXP;
+
+
+        playerData.totalXP =
+            totalXP;
+
+
+        playerData.level =
+            level;
+
+
+        const levelText =
+            document.getElementById(
+                "levelText"
+            );
+
+
+        const xpText =
+            document.getElementById(
+                "xpText"
+            );
+
+
+        const xpProgress =
+            document.getElementById(
+                "xpProgress"
+            );
+
+
+        const nextLevelText =
+            document.getElementById(
+                "nextLevelText"
+            );
+
+
+        if (levelText) {
+
+            levelText.textContent =
+                "المستوى " + level;
+
+        }
+
+
+        if (xpText) {
+
+            xpText.textContent =
+                currentLevelXP +
+                " / 100 XP";
+
+        }
+
+
+        if (xpProgress) {
+
+            xpProgress.style.width =
+                currentLevelXP + "%";
+
+        }
+
+
+        if (nextLevelText) {
+
+            nextLevelText.textContent =
+                currentLevelXP === 0
+
+                    ? "100 XP للمستوى التالي"
+
+                    : xpNeeded +
+                      " XP للمستوى التالي";
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "خطأ في XP:",
+            error
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// Daily Challenge
+// ==========================================
+
+async function loadDaily(user) {
+
+    try {
+
+        const doc =
+            await db
+                .collection("dailyChallenges")
+                .doc(user.uid)
+                .get();
+
+
+        if (!doc.exists) {
+
+            updateDailyUI(
+                0,
+                0
+            );
+
+            return;
+
+        }
+
+
+        const data =
+            doc.data();
+
+
+        const streak =
+            Number(data.streak) || 0;
+
+
+        const totalCompleted =
+            Number(data.totalCompleted) || 0;
+
+
+        playerData.streak =
+            streak;
+
+
+        playerData.totalDaily =
+            totalCompleted;
+
+
+        updateDailyUI(
+            streak,
+            totalCompleted
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "خطأ في Daily Challenge:",
+            error
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// تحديث Daily
+// ==========================================
+
+function updateDailyUI(
+    streak,
+    totalCompleted
+) {
+
+    const streakBadge =
+        document.getElementById(
+            "streakBadge"
+        );
+
+
+    const dailyStreak =
+        document.getElementById(
+            "dailyStreak"
+        );
+
+
+    const dailyCompleted =
+        document.getElementById(
+            "dailyCompleted"
+        );
+
+
+    if (streakBadge) {
+
+        streakBadge.textContent =
+            "🔥 Streak: " + streak;
+
+    }
+
+
+    if (dailyStreak) {
+
+        dailyStreak.textContent =
+            streak;
+
+    }
+
+
+    if (dailyCompleted) {
+
+        dailyCompleted.textContent =
+            totalCompleted;
+
+    }
+
+}
+
+
+// ==========================================
+// الشارات
+// ==========================================
+
+async function loadBadges() {
+
+    const badgesGrid =
+        document.getElementById(
+            "badgesGrid"
+        );
+
+
+    if (!badgesGrid) {
+        return;
+    }
+
+
+    const badges = [
+
+        {
+            icon: "🎮",
+            name: "أول لعبة",
+            description: "العب أول لعبة",
+            unlocked:
+                playerData.gamesCount >= 1
+        },
+
+        {
+            icon: "🎯",
+            name: "أول تحدي يومي",
+            description: "أكمل أول تحدي يومي",
+            unlocked:
+                playerData.totalDaily >= 1
+        },
+
+        {
+            icon: "🔥",
+            name: "Streak 3 أيام",
+            description:
+                "حافظ على Streak لمدة 3 أيام",
+            unlocked:
+                playerData.streak >= 3
+        },
+
+        {
+            icon: "🏆",
+            name: "Streak 7 أيام",
+            description:
+                "حافظ على Streak لمدة 7 أيام",
+            unlocked:
+                playerData.streak >= 7
+        },
+
+        {
+            icon: "🎯",
+            name: "10 ألعاب",
+            description:
+                "العب 10 ألعاب",
+            unlocked:
+                playerData.gamesCount >= 10
+        },
+
+        {
+            icon: "⚡",
+            name: "Combo ×5",
+            description:
+                "وصل إلى Combo 5",
+            unlocked:
+                playerData.bestCombo >= 5
+        },
+
+        {
+            icon: "💥",
+            name: "Combo ×10",
+            description:
+                "وصل إلى Combo 10",
+            unlocked:
+                playerData.bestCombo >= 10
+        },
+
+        {
+            icon: "🏆",
+            name: "1000 نقطة",
+            description:
+                "اجمع 1000 نقطة",
+            unlocked:
+                playerData.totalScore >= 1000
+        },
+
+        {
+            icon: "💎",
+            name: "5000 نقطة",
+            description:
+                "اجمع 5000 نقطة",
+            unlocked:
+                playerData.totalScore >= 5000
+        },
+
+        {
+            icon: "⭐",
+            name: "المستوى 5",
+            description:
+                "الوصول إلى المستوى 5",
+            unlocked:
+                playerData.level >= 5
+        }
+
+    ];
+
+
+    badgesGrid.innerHTML = "";
+
+
+    let unlockedCount = 0;
+
+
+    badges.forEach(
+        function(badge) {
+
+            if (badge.unlocked) {
+                unlockedCount++;
+            }
+
+
+            const badgeElement =
+                document.createElement(
+                    "div"
+                );
+
+
+            badgeElement.className =
+                "badge " +
+                (
+                    badge.unlocked
+                        ? "unlocked"
+                        : "locked"
+                );
+
+
+            badgeElement.innerHTML = `
+
+                <div class="badge-icon">
+                    ${badge.icon}
+                </div>
+
+
+                <div class="badge-name">
+                    ${badge.name}
+                </div>
+
+
+                <div class="badge-description">
+                    ${badge.description}
+                </div>
+
+
+                <div class="badge-status">
+
+                    ${
+                        badge.unlocked
+                            ? "✓ تم فتحها"
+                            : "🔒 مقفولة"
+                    }
+
+                </div>
+
+            `;
+
+
+            badgesGrid.appendChild(
+                badgeElement
+            );
+
+        }
+    );
+
+
+    const badgesCounter =
+        document.getElementById(
+            "badgesCounter"
+        );
+
+
+    if (badgesCounter) {
+
+        badgesCounter.textContent =
+            unlockedCount +
+            " / " +
+            badges.length +
+            " شارات";
+
+    }
+
+}
+
+
+// ==========================================
+// الإطارات
+// ==========================================
+
+async function loadFrames(user) {
+
+    const framesGrid =
+        document.getElementById(
+            "framesGrid"
+        );
+
+
+    if (!framesGrid) {
+        return;
+    }
+
+
+    framesGrid.innerHTML = "";
+
+
+    try {
+
+        const purpleFrameDoc =
+            await db
+                .collection("users")
+                .doc(user.uid)
+                .collection("purchases")
+                .doc("purple-frame")
+                .get();
+
+
+        const hasPurpleFrame =
+            purpleFrameDoc.exists;
+
+
+        framesGrid.innerHTML = `
+
+            <div class="frame-card">
+
+                <div
+                    class="frame-preview purple">
+
+                    ${escapeHTML(
+                        document
+                            .getElementById("mainAvatar")
+                            ?.textContent
+                            .trim() || "👤"
+                    )}
+
+                </div>
+
+                <div class="frame-name">
+                    الإطار البنفسجي
+                </div>
+
+                <div
+                    class="${
+                        hasPurpleFrame
+                            ? "frame-status"
+                            : "frame-locked"
+                    }">
+
+                    ${
+                        hasPurpleFrame
+                            ? "✓ تم الحصول عليه"
+                            : "🔒 غير مملوك"
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div class="frame-card">
+
+                <div class="frame-preview">
+
+                    👤
+
+                </div>
+
+                <div class="frame-name">
+                    الإطار الأساسي
+                </div>
+
+                <div class="frame-status">
+                    ✓ متاح دائمًا
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "خطأ في تحميل الإطارات:",
+            error
+        );
+
+
+        framesGrid.innerHTML = `
+
+            <div class="wrong-empty">
+
+                ❌ حدث خطأ أثناء تحميل الإطارات.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// ==========================================
+// الأسئلة الغلط
+// ==========================================
+
+async function loadWrongQuestions(user) {
+
+    const list =
+        document.getElementById(
+            "wrongQuestionsList"
+        );
+
+
+    const counter =
+        document.getElementById(
+            "wrongQuestionsCounter"
+        );
+
+
+    if (!list) {
+        return;
+    }
+
+
+    try {
+
+        const snapshot =
+            await db
+                .collection("users")
+                .doc(user.uid)
+                .collection("wrongQuestions")
+                .get();
+
+
+        if (snapshot.empty) {
+
+            if (counter) {
+
+                counter.textContent =
+                    "0 أسئلة";
+
+            }
+
+
+            list.innerHTML = `
+
+                <div class="wrong-empty">
+
+                    <div class="wrong-empty-icon">
+                        🎉
+                    </div>
+
+                    <div class="wrong-empty-title">
+                        مفيش أخطاء!
+                    </div>
+
+                    <div class="wrong-empty-text">
+
+                        لسه مفيش أسئلة غلط محفوظة.
+                        استمر كده!
+
+                    </div>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        let questions = [];
+
+
+        snapshot.forEach(
+            function(doc) {
+
+                const data =
+                    doc.data();
+
+
+                questions.push({
+
+                    id: doc.id,
+
+                    question:
+                        data.question ||
+                        "سؤال غير معروف",
+
+                    answers:
+                        Array.isArray(data.answers)
+                            ? data.answers
+                            : [],
+
+                    selectedAnswer:
+                        data.selectedAnswer ||
+                        "لم تتم الإجابة",
+
+                    correctAnswer:
+                        data.correctAnswer ||
+                        "غير معروف",
+
+                    category:
+                        data.category ||
+                        "general",
+
+                    difficulty:
+                        data.difficulty ||
+                        "normal",
+
+                    createdAt:
+                        data.createdAt || null
+
+                });
+
+            }
+        );
+
+
+        // الأحدث أولًا
+
+        questions.sort(
+            function(a, b) {
+
+                const aTime =
+                    a.createdAt &&
+                    a.createdAt.toMillis
+                        ? a.createdAt.toMillis()
+                        : 0;
+
+
+                const bTime =
+                    b.createdAt &&
+                    b.createdAt.toMillis
+                        ? b.createdAt.toMillis()
+                        : 0;
+
+
+                return bTime - aTime;
+
+            }
+        );
+
+
+        if (counter) {
+
+            counter.textContent =
+                questions.length +
+                " سؤال محفوظ";
+
+        }
+
+
+        list.innerHTML = "";
+
+
+        const categoryNames = {
+
+            general: "🧠 معلومات عامة",
+            science: "🔬 العلوم",
+            geography: "🌍 الجغرافيا",
+            history: "📜 التاريخ",
+            math: "➗ الرياضيات",
+            technology: "💻 التكنولوجيا",
+            sports: "⚽ الرياضة",
+            games: "🎮 الألعاب",
+            movies: "🎬 الأفلام",
+            music: "🎵 الموسيقى",
+            english: "🇬🇧 الإنجليزية",
+            riddles: "🧩 الألغاز",
+            space: "🚀 الفضاء",
+            animals: "🐾 الحيوانات",
+            food: "🍔 الطعام",
+            egypt: "🇪🇬 مصر"
+
+        };
+
+
+        const difficultyNames = {
+
+            easy: "سهل",
+
+            normal: "عادي",
+
+            medium: "متوسط",
+
+            hard: "صعب",
+
+            expert: "خبير"
+
+        };
+
+
+        questions.forEach(
+            function(item, index) {
+
+                const element =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                element.className =
+                    "wrong-question";
+
+
+                const category =
+                    categoryNames[
+                        item.category
+                    ] ||
+                    item.category;
+
+
+                const difficulty =
+                    difficultyNames[
+                        item.difficulty
+                    ] ||
+                    item.difficulty;
+
+
+                let dateText =
+                    "بدون تاريخ";
+
+
+                if (
+                    item.createdAt &&
+                    item.createdAt.toDate
+                ) {
+
+                    dateText =
+                        item.createdAt
+                            .toDate()
+                            .toLocaleDateString(
+                                "ar-EG"
+                            );
+
+                }
+
+
+                const correctId =
+                    "correctAnswer_" +
+                    index;
+
+
+                element.innerHTML = `
+
+                    <div class="wrong-question-title">
+
+                        ${escapeHTML(
+                            item.question
+                        )}
+
+                    </div>
+
+
+                    <div class="wrong-meta">
+
+                        <span class="wrong-tag">
+
+                            ${escapeHTML(
+                                category
+                            )}
+
+                        </span>
+
+
+                        <span class="wrong-tag">
+
+                            🎯 ${escapeHTML(
+                                difficulty
+                            )}
+
+                        </span>
+
+
+                        <span class="wrong-tag">
+
+                            📅 ${escapeHTML(
+                                dateText
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="wrong-answer-box">
+
+                        <div class="wrong-answer-label">
+
+                            ❌ إجابتك
+
+                        </div>
+
+                        <div class="wrong-answer">
+
+                            ${escapeHTML(
+                                item.selectedAnswer
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="correct-answer-box"
+                        id="${correctId}">
+
+                        <div class="correct-answer-label">
+
+                            ✅ الإجابة الصحيحة
+
+                        </div>
+
+                        <div class="correct-answer">
+
+                            ${escapeHTML(
+                                item.correctAnswer
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="show-answer-btn"
+                        onclick="toggleCorrectAnswer('${correctId}', this)">
+
+                        👁️ إظهار الإجابة الصحيحة
+
+                    </button>
+
+                `;
+
+
+                list.appendChild(
+                    element
+                );
+
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "خطأ في تحميل الأسئلة الغلط:",
+            error
+        );
+
+
+        if (counter) {
+
+            counter.textContent =
+                "حدث خطأ";
+
+        }
+
+
+        list.innerHTML = `
+
+            <div class="wrong-empty">
+
+                <div class="wrong-empty-icon">
+                    ⚠️
+                </div>
+
+                <div class="wrong-empty-title">
+
+                    تعذر تحميل الأسئلة
+
+                </div>
+
+                <div class="wrong-empty-text">
+
+                    تأكد من Firestore Rules
+                    ثم أعد تحميل الصفحة.
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// ==========================================
+// إظهار / إخفاء الإجابة الصحيحة
+// ==========================================
+
+function toggleCorrectAnswer(
+    id,
+    button
+) {
+
+    const box =
+        document.getElementById(id);
+
+
+    if (!box) {
+        return;
+    }
+
+
+    const isShown =
+        box.classList.contains(
+            "show"
+        );
+
+
+    if (isShown) {
+
+        box.classList.remove(
+            "show"
+        );
+
+
+        button.textContent =
+            "👁️ إظهار الإجابة الصحيحة";
+
+    }
+
+    else {
+
+        box.classList.add(
+            "show"
+        );
+
+
+        button.textContent =
+            "🙈 إخفاء الإجابة الصحيحة";
+
+    }
+
+}
+
+
+// ==========================================
+// تسجيل الخروج
+// ==========================================
+
+async function logout() {
+
+    try {
+
+        await firebase
+            .auth()
+            .signOut();
+
+
+        window.location.href =
+            "index.html";
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        alert(
+            "حدث خطأ أثناء تسجيل الخروج"
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// حماية HTML
+// ==========================================
+
+function escapeHTML(value) {
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+</script>
 
 </body>
 

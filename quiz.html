@@ -5,88 +5,1198 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>الاختبار - Tofaa Quiz 🎮</title>
+    <title>Tofaa Quiz - اللعب</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .quiz-page {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 750px;
+            background: #1E293B;
+            border: 1px solid #29384F;
+            border-radius: 25px;
+            padding: 30px;
+        }
+
+        /* =========================
+           Daily Challenge
+        ========================= */
+
+        .daily-card {
+            background: linear-gradient(
+                135deg,
+                #312E81,
+                #581C87
+            );
+
+            border: 1px solid #7C3AED;
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 25px;
+        }
+
+        .daily-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .daily-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .daily-streak {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 7px 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #FBBF24;
+        }
+
+        .daily-description {
+            color: #E2E8F0;
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .daily-progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+            font-size: 13px;
+            color: #E2E8F0;
+        }
+
+        .daily-progress {
+            height: 10px;
+            background: #0F172A;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .daily-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #22D3EE;
+            border-radius: 20px;
+            transition: width 0.3s ease;
+        }
+
+        .daily-reward {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #F8FAFC;
+        }
+
+        .daily-status {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #22C55E;
+        }
+
+        .daily-play-btn {
+            width: 100%;
+            margin-top: 14px;
+            padding: 13px;
+            background: #22D3EE;
+            color: #0F172A;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .daily-play-btn:hover {
+            opacity: 0.9;
+        }
+
+        .daily-completed {
+            background: #14532D;
+            border-color: #22C55E;
+        }
+
+        /* =========================
+           Game Info
+        ========================= */
+
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .info-box {
+            background: #0F172A;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        #timer {
+            color: #22D3EE;
+        }
+
+        #hearts {
+            color: #EF4444;
+        }
+
+        #combo {
+            color: #22C55E;
+        }
+
+        #question-number {
+            color: #94A3B8;
+            margin-bottom: 15px;
+        }
+
+        #question {
+            font-size: 27px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        #answers {
+            display: grid;
+            gap: 15px;
+        }
+
+        .answer-btn {
+            width: 100%;
+            padding: 17px;
+            background: #0F172A;
+            color: #F8FAFC;
+            border: 2px solid #29384F;
+            border-radius: 15px;
+            font-size: 17px;
+            text-align: right;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .answer-btn:hover {
+            border-color: #7C3AED;
+            transform: translateX(-3px);
+        }
+
+        .answer-btn:disabled {
+            cursor: default;
+        }
+
+        .answer-btn.correct {
+            background: #166534;
+            border-color: #22C55E;
+        }
+
+        .answer-btn.wrong {
+            background: #991B1B;
+            border-color: #EF4444;
+        }
+
+        #next-btn {
+            display: none;
+            margin-top: 25px;
+            width: 100%;
+            padding: 16px;
+            background: #7C3AED;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #next-btn:hover {
+            background: #6D28D9;
+        }
+
+        /* =========================
+           Result
+        ========================= */
+
+        .result-screen {
+            text-align: center;
+        }
+
+        .result-screen h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .result-screen h2,
+        .result-screen h3 {
+            margin: 12px 0;
+        }
+
+        .result-small {
+            color: #94A3B8;
+            font-size: 16px;
+        }
+
+        .result-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin-top: 12px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            background: #7C3AED;
+            color: white;
+        }
+
+        .result-btn:hover {
+            background: #6D28D9;
+        }
+
+        .daily-result {
+            margin: 20px 0;
+            padding: 18px;
+            background: #0F172A;
+            border: 1px solid #7C3AED;
+            border-radius: 18px;
+        }
+
+        .daily-result h3 {
+            color: #22D3EE;
+        }
+
+        .reward-line {
+            color: #FBBF24;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 600px) {
+
+            .quiz-container {
+                padding: 20px;
+            }
+
+            #question {
+                font-size: 22px;
+            }
+
+            .game-info {
+                justify-content: center;
+            }
+
+            .daily-top {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+        }
+/* ======================================================
+   ✨ FINAL POLISH - TOFAA QUIZ
+   Responsive + Animations
+   ====================================================== */
+
+/* =========================
+   Smooth Base
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+/* =========================
+   Quiz Container Animation
+========================= */
+
+.quiz-container {
+    animation: quizContainerIn 0.55s ease both;
+}
+
+@keyframes quizContainerIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   Game Info
+========================= */
+
+.info-box {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.info-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================
+   Timer
+========================= */
+
+#timer {
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+#timer.timer-warning {
+    color: #EF4444;
+    animation: timerPulse 0.8s ease-in-out infinite;
+}
+
+@keyframes timerPulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+/* =========================
+   Hearts
+========================= */
+
+#hearts {
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+#hearts.heart-lost {
+    animation: heartLost 0.45s ease;
+}
+
+@keyframes heartLost {
+    0% {
+        transform: scale(1);
+    }
+
+    35% {
+        transform: scale(1.25);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* =========================
+   Combo
+========================= */
+
+#combo.combo-up {
+    animation: comboUp 0.4s ease;
+}
+
+@keyframes comboUp {
+    0% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* =========================
+   Question
+========================= */
+
+#question {
+    animation: questionIn 0.4s ease both;
+}
+
+@keyframes questionIn {
+    from {
+        opacity: 0;
+        transform: translateX(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* =========================
+   Answers
+========================= */
+
+.answer-btn {
+    position: relative;
+    overflow: hidden;
+    animation: answerIn 0.35s ease both;
+}
+
+.answer-btn:nth-child(1) {
+    animation-delay: 0.04s;
+}
+
+.answer-btn:nth-child(2) {
+    animation-delay: 0.08s;
+}
+
+.answer-btn:nth-child(3) {
+    animation-delay: 0.12s;
+}
+
+.answer-btn:nth-child(4) {
+    animation-delay: 0.16s;
+}
+
+@keyframes answerIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.answer-btn:hover {
+    transform: translateX(-4px) translateY(-2px);
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.15);
+}
+
+.answer-btn:active {
+    transform: scale(0.98);
+}
+
+/* =========================
+   Correct Answer
+========================= */
+
+.answer-btn.correct {
+    animation: correctAnswer 0.55s ease;
+}
+
+@keyframes correctAnswer {
+    0% {
+        transform: scale(1);
+    }
+
+    35% {
+        transform: scale(1.04);
+    }
+
+    65% {
+        transform: scale(0.98);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* =========================
+   Wrong Answer
+========================= */
+
+.answer-btn.wrong {
+    animation: wrongAnswer 0.45s ease;
+}
+
+@keyframes wrongAnswer {
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-7px);
+    }
+
+    40% {
+        transform: translateX(7px);
+    }
+
+    60% {
+        transform: translateX(-5px);
+    }
+
+    80% {
+        transform: translateX(5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* =========================
+   Next Button
+========================= */
+
+#next-btn {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+#next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(124, 58, 237, 0.25);
+}
+
+#next-btn:active {
+    transform: scale(0.98);
+}
+
+/* =========================
+   Daily Card
+========================= */
+
+.daily-card {
+    animation: dailyCardIn 0.5s ease both;
+}
+
+@keyframes dailyCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.daily-play-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(34, 211, 238, 0.18);
+}
+
+.daily-play-btn:active {
+    transform: scale(0.98);
+}
+
+/* =========================
+   Result Screen
+========================= */
+
+.result-screen {
+    animation: resultIn 0.6s ease both;
+}
+
+@keyframes resultIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.result-screen h1 {
+    animation: resultTitle 0.7s ease 0.1s both;
+}
+
+@keyframes resultTitle {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.result-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.2);
+}
+
+.result-btn:active {
+    transform: scale(0.98);
+}
+
+/* =========================
+   VIP Result
+========================= */
+
+.vip-result {
+    animation: vipIn 0.6s ease both;
+}
+
+@keyframes vipIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   Daily Result
+========================= */
+
+.daily-result {
+    animation: dailyResultIn 0.6s ease both;
+}
+
+@keyframes dailyResultIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 600px) {
+
+    .quiz-page {
+        padding: 12px;
+    }
+
+    .quiz-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 18px !important;
+        border-radius: 18px;
+    }
+
+    .game-info {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 9px;
+        margin-bottom: 22px;
+    }
+
+    .info-box {
+        width: 100%;
+        padding: 10px 8px;
+        text-align: center;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+
+    #question-number {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    #question {
+        font-size: 21px !important;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+
+    #answers {
+        gap: 10px;
+    }
+
+    .answer-btn {
+        padding: 14px 13px;
+        font-size: 15px;
+        line-height: 1.6;
+        border-radius: 13px;
+    }
+
+    #next-btn {
+        padding: 14px;
+        font-size: 16px;
+        border-radius: 13px;
+    }
+
+    .daily-card {
+        padding: 17px !important;
+        border-radius: 16px;
+    }
+
+    .daily-title {
+        font-size: 21px;
+    }
+
+    .daily-description {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .daily-reward {
+        font-size: 12px;
+    }
+
+    .daily-status {
+        font-size: 13px;
+    }
+
+    .result-screen h1 {
+        font-size: 27px;
+    }
+
+    .result-screen h2 {
+        font-size: 21px;
+    }
+
+    .result-screen h3 {
+        font-size: 17px;
+    }
+
+    .result-btn {
+        padding: 13px;
+        font-size: 15px;
+    }
+}
+
+/* =========================
+   Very Small Phones
+========================= */
+
+@media (max-width: 380px) {
+
+    .quiz-page {
+        padding: 8px;
+    }
+
+    .quiz-container {
+        padding: 14px !important;
+    }
+
+    .game-info {
+        gap: 7px;
+    }
+
+    .info-box {
+        font-size: 12px;
+        padding: 9px 5px;
+    }
+
+    #question {
+        font-size: 19px !important;
+    }
+
+    .answer-btn {
+        font-size: 14px;
+        padding: 13px 11px;
+    }
+
+    .daily-title {
+        font-size: 19px;
+    }
+}
+
+/* =========================
+   Accessibility
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+/* ======================================================
+   🔔 TOFAA TOAST NOTIFICATIONS
+====================================================== */
+
+#tofaa-toast-container {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 10px;
+
+    pointer-events: none;
+}
+
+.tofaa-toast {
+    min-width: 220px;
+    max-width: 90vw;
+
+    padding: 13px 20px;
+
+    background: #1E293B;
+    color: #F8FAFC;
+
+    border: 1px solid #29384F;
+    border-radius: 14px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.35);
+
+    font-size: 14px;
+    font-weight: bold;
+
+    text-align: center;
+
+    animation:
+        toastIn 0.35s ease forwards;
+
+    direction: rtl;
+}
+
+.tofaa-toast.success {
+    border-color: #22C55E;
+}
+
+.tofaa-toast.error {
+    border-color: #EF4444;
+}
+
+.tofaa-toast.vip {
+    border-color: #7C3AED;
+}
+
+.tofaa-toast.coin {
+    border-color: #FBBF24;
+}
+
+.tofaa-toast.hide {
+    animation:
+        toastOut 0.3s ease forwards;
+}
+
+@keyframes toastIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+@keyframes toastOut {
+
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.95);
+    }
+
+}
+
+
+/* ======================================================
+   🪙 COIN POP
+====================================================== */
+
+.coin-pop {
+    position: fixed;
+
+    z-index: 99998;
+
+    color: #FBBF24;
+
+    font-size: 18px;
+    font-weight: 900;
+
+    pointer-events: none;
+
+    animation: coinPop 0.9s ease forwards;
+}
+
+@keyframes coinPop {
+
+    0% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.7);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translateY(0) scale(1.15);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-45px) scale(1);
+    }
+
+}
+
+
+/* ======================================================
+   🔥 COMBO POP
+====================================================== */
+
+.combo-pop {
+    animation: comboPop 0.45s ease;
+}
+
+@keyframes comboPop {
+
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.22);
+    }
+
+    70% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* ======================================================
+   📱 MOBILE TOAST
+====================================================== */
+
+@media (max-width: 600px) {
+
+    #tofaa-toast-container {
+        top: 15px;
+        width: 100%;
+        padding: 0 12px;
+    }
+
+    .tofaa-toast {
+        width: 100%;
+        max-width: 360px;
+
+        padding: 12px 15px;
+
+        font-size: 13px;
+    }
+
+}
+    </style>
 </head>
 
 <body>
 
-    <header>
+<div class="quiz-page">
 
-        <div class="logo">
-            Tofaa 🎮
-        </div>
+    <div class="quiz-container">
 
-        <nav>
-            <a href="index.html">الرئيسية</a>
-            <a href="index.html#challenges">التحديات</a>
-            <a href="leaderboard.html">المتصدرين</a>
-        </nav>
+        <!-- =========================
+             Daily Challenge
+        ========================= -->
 
-        <a href="profile.html" class="profile">
-            👤 حسابي
-        </a>
+        <div
+            id="daily-card"
+            class="daily-card"
+        >
 
-    </header>
+            <div class="daily-top">
 
-    <main>
-
-        <section class="quiz-container">
-
-            <div class="quiz-top">
-
-                <div class="hearts">
-                    ❤️ ❤️ ❤️
+                <div class="daily-title">
+                    🎯 التحدي اليومي
                 </div>
 
-                <div class="score">
-                    ⭐ 0
-                </div>
-
-                <div class="timer">
-                    ⏱️ 15
+                <div
+                    id="daily-streak"
+                    class="daily-streak"
+                >
+                    🔥 Streak: 0
                 </div>
 
             </div>
 
-            <div class="quiz-card">
+            <div class="daily-description">
+                أجب عن 5 أسئلة صحيحة متتالية واربح مكافأتك اليومية!
+            </div>
 
-                <span class="question-number">
-                    السؤال 1
+            <div class="daily-progress-text">
+
+                <span>
+                    التقدم
                 </span>
 
-                <h1>
-                    جاري تحميل السؤال...
-                </h1>
-
-                <div class="answers">
-
-                    <button class="answer-button">
-                        جاري التحميل...
-                    </button>
-
-                </div>
+                <span id="daily-progress-text">
+                    0 / 5
+                </span>
 
             </div>
 
-        </section>
+            <div class="daily-progress">
 
-    </main>
+                <div
+                    id="daily-progress-bar"
+                    class="daily-progress-bar"
+                ></div>
 
-    <footer>
+            </div>
 
-        <p>
-            © 2026 Tofaa Quiz 🎮
-        </p>
+            <div class="daily-reward">
+                🎁 المكافأة: +500 نقطة • +200 XP
+            </div>
 
-    </footer>
+            <div
+                id="daily-status"
+                class="daily-status"
+            >
+                جاري تحميل التحدي...
+            </div>
 
-    <!-- مهم: question.js الأول -->
-    <script src="question.js"></script>
+            <button
+                id="daily-play-btn"
+                class="daily-play-btn"
+                onclick="startDailyChallenge()"
+            >
+                🎯 ابدأ التحدي اليومي
+            </button>
 
-    <!-- وبعده script.js -->
-    <script src="script.js"></script>
+        </div>
+
+
+        <!-- =========================
+             Game Info
+        ========================= -->
+
+        <div class="game-info">
+
+            <div class="info-box">
+                ⭐ النقاط:
+                <span id="score">0</span>
+            </div>
+
+            <div class="info-box">
+                ❤️
+                <span id="hearts">3</span>
+            </div>
+
+            <div class="info-box">
+                🔥
+                <span id="combo">0</span>
+            </div>
+
+            <div class="info-box">
+                ⏱️
+                <span id="timer">15</span>
+            </div>
+
+        </div>
+
+
+        <div id="question-number">
+            السؤال 1
+        </div>
+
+
+        <h1 id="question">
+            جاري تحميل السؤال...
+        </h1>
+
+
+        <div id="answers"></div>
+
+
+        <button id="next-btn">
+            السؤال التالي →
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
+
+<script src="firebase.js"></script>
+
+<script src="question.js"></script>
+
+<script src="script.js"></script>
 
 </body>
 

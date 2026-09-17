@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>تسجيل الدخول - Tofaa Quiz</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    font-family: Arial, sans-serif;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(124,58,237,0.2),
+            transparent 40%
+        ),
+        #0F172A;
+
+    color: #F8FAFC;
+}
+
+.auth-container {
+
+    width: 100%;
+
+    max-width: 440px;
+
+}
+
+.logo {
+
+    text-align: center;
+
+    font-size: 30px;
+
+    font-weight: 900;
+
+    margin-bottom: 25px;
+}
+
+.logo span {
+    color: #22D3EE;
+}
+
+.auth-card {
+
+    background:
+        linear-gradient(
+            145deg,
+            #1E293B,
+            #172033
+        );
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    border-radius: 25px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.35);
+}
+
+.auth-header {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.auth-header .icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    margin: auto auto 15px;
+
+    border-radius: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(124,58,237,0.15);
+
+    font-size: 30px;
+}
+
+.auth-header h1 {
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
+}
+
+.auth-header p {
+
+    color: #94A3B8;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+.tabs {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+
+    background: #0F172A;
+
+    padding: 5px;
+
+    border-radius: 14px;
+
+    margin-bottom: 25px;
+}
+
+.tab {
+
+    border: none;
+
+    background: transparent;
+
+    color: #94A3B8;
+
+    padding: 11px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.tab.active {
+
+    background: #7C3AED;
+
+    color: white;
+}
+
+.form-group {
+
+    margin-bottom: 17px;
+}
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #CBD5E1;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+.form-group input {
+
+    width: 100%;
+
+    padding: 14px 15px;
+
+    border-radius: 13px;
+
+    border:
+        1px solid #334155;
+
+    background: #0F172A;
+
+    color: white;
+
+    outline: none;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+.form-group input:focus {
+
+    border-color: #7C3AED;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(124,58,237,0.12);
+}
+
+.submit-btn {
+
+    width: 100%;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 14px;
+
+    background: #7C3AED;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    margin-top: 5px;
+}
+
+.submit-btn:hover {
+
+    background: #6D28D9;
+
+    transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================
+   MESSAGES
+========================= */
+
+.message {
+
+    display: none;
+
+    margin-bottom: 17px;
+
+    padding: 12px 14px;
+
+    border-radius: 12px;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+.message.error {
+
+    display: block;
+
+    background:
+        rgba(239,68,68,0.1);
+
+    border:
+        1px solid rgba(239,68,68,0.25);
+
+    color: #FCA5A5;
+}
+
+.message.success {
+
+    display: block;
+
+    background:
+        rgba(34,197,94,0.1);
+
+    border:
+        1px solid rgba(34,197,94,0.25);
+
+    color: #86EFAC;
+}
+
+
+/* =========================
+   SOCIAL LOGIN
+========================= */
+
+.social-divider {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 22px 0 18px;
+
+    color: #64748B;
+
+    font-size: 12px;
+}
+
+.social-divider::before,
+.social-divider::after {
+
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: #334155;
+}
+
+.social-buttons {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.social-btn {
+
+    width: 100%;
+
+    min-height: 48px;
+
+    border: 1px solid #334155;
+
+    border-radius: 13px;
+
+    padding: 12px 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        opacity 0.2s;
+
+    color: #F8FAFC;
+}
+
+.social-btn:hover {
+
+    transform: translateY(-2px);
+}
+
+.social-btn:active {
+
+    transform: scale(0.98);
+}
+
+.social-icon {
+
+    width: 24px;
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+    text-align: center;
+}
+/* =========================
+   BACK HOME
+========================= */
+
+.back-home {
+
+    display: block;
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #94A3B8;
+
+    font-size: 13px;
+}
+
+.back-home:hover {
+
+    color: #22D3EE;
+}
+
+.hidden {
+
+    display: none;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+    .auth-card {
+
+        padding: 23px 18px;
+
+    }
+
+    .auth-header h1 {
+
+        font-size: 24px;
+
+    }
+
+    .social-btn {
+
+        min-height: 46px;
+
+        font-size: 13px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="auth-container">
+
+
+    <!-- =========================
+         LOGO
+    ========================== -->
+
+    <div class="logo">
+
+        TOFAA<span>QUIZ</span>
+
+    </div>
+
+
+    <!-- =========================
+         AUTH CARD
+    ========================== -->
+
+    <div class="auth-card">
+
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <div class="auth-header">
+
+            <div class="icon">
+
+                👤
+
+            </div>
+
+            <h1 id="authTitle">
+
+                تسجيل الدخول
+
+            </h1>
+
+            <p id="authDescription">
+
+                ادخل حسابك وكمل تحدياتك 🔥
+
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             TABS
+        ========================== -->
+
+        <div class="tabs">
+
+            <button
+                id="loginTab"
+                class="tab active"
+                onclick="showLogin()"
+            >
+
+                تسجيل الدخول
+
+            </button>
+
+            <button
+                id="registerTab"
+                class="tab"
+                onclick="showRegister()"
+            >
+
+                إنشاء حساب
+
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             MESSAGE
+        ========================== -->
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <!-- =========================
+             REGISTER NAME
+        ========================== -->
+
+        <div
+            id="nameGroup"
+            class="form-group hidden"
+        >
+
+            <label>
+
+                اسم اللاعب
+
+            </label>
+
+            <input
+                id="name"
+                type="text"
+                maxlength="30"
+                placeholder="اكتب اسمك"
+                autocomplete="name"
+            >
+
+        </div>
+
+
+        <!-- =========================
+             EMAIL
+        ========================== -->
+
+        <div class="form-group">
+
+            <label>
+
+                البريد الإلكتروني
+
+            </label>
+
+            <input
+                id="email"
+                type="email"
+                placeholder="example@email.com"
+                autocomplete="email"
+            >
+
+        </div>
+
+
+        <!-- =========================
+             PASSWORD
+        ========================== -->
+
+        <div class="form-group">
+
+            <label>
+
+                كلمة المرور
+
+            </label>
+
+            <input
+                id="password"
+                type="password"
+                placeholder="كلمة المرور"
+                autocomplete="current-password"
+            >
+
+        </div>
+
+
+        <!-- =========================
+             EMAIL LOGIN BUTTON
+        ========================== -->
+
+        <button
+            id="submitBtn"
+            class="submit-btn"
+            onclick="submitAuth()"
+        >
+
+            تسجيل الدخول
+
+        </button>
+    <!-- =========================
+         BACK HOME
+    ========================== -->
+
+    <a
+        href="index.html"
+        class="back-home"
+    >
+
+        ← العودة للرئيسية
+
+    </a>
+
+
+</div>
+
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
+
+<script src="firebase.js"></script>
+
+
+<script>
+
+
+let mode = "login";
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const nameGroup =
+    document.getElementById("nameGroup");
+
+const nameInput =
+    document.getElementById("name");
+
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+const submitBtn =
+    document.getElementById("submitBtn");
+
+const message =
+    document.getElementById("message");
+
+const authTitle =
+    document.getElementById("authTitle");
+
+const authDescription =
+    document.getElementById("authDescription");
+
+const loginTab =
+    document.getElementById("loginTab");
+
+const registerTab =
+    document.getElementById("registerTab");
+
+
+/* =========================================
+   تسجيل الدخول
+========================================= */
+
+function showLogin() {
+
+    mode = "login";
+
+    nameGroup.classList.add("hidden");
+
+    loginTab.classList.add("active");
+
+    registerTab.classList.remove("active");
+
+    authTitle.textContent =
+        "تسجيل الدخول";
+
+    authDescription.textContent =
+        "ادخل حسابك وكمل تحدياتك 🔥";
+
+    submitBtn.textContent =
+        "تسجيل الدخول";
+
+    clearMessage();
+}
+
+
+/* =========================================
+   إنشاء حساب
+========================================= */
+
+function showRegister() {
+
+    mode = "register";
+
+    nameGroup.classList.remove("hidden");
+
+    registerTab.classList.add("active");
+
+    loginTab.classList.remove("active");
+
+    authTitle.textContent =
+        "إنشاء حساب";
+
+    authDescription.textContent =
+        "اعمل حساب وابدأ رحلة التحديات 🚀";
+
+    submitBtn.textContent =
+        "إنشاء الحساب";
+
+    clearMessage();
+}
+
+
+/* =========================================
+   الرسائل
+========================================= */
+
+function showMessage(text, type) {
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+}
+
+
+function clearMessage() {
+
+    message.textContent = "";
+
+    message.className =
+        "message";
+}
+
+
+/* =========================================
+   أخطاء تسجيل الدخول العادي
+========================================= */
+
+function getAuthError(error) {
+
+    switch (error.code) {
+
+        case "auth/email-already-in-use":
+
+            return "الإيميل ده مستخدم بالفعل.";
+
+        case "auth/invalid-email":
+
+            return "الإيميل غير صحيح.";
+
+        case "auth/weak-password":
+
+            return "كلمة المرور ضعيفة. استخدم 6 أحرف أو أكثر.";
+
+        case "auth/user-not-found":
+
+            return "مفيش حساب بالإيميل ده.";
+
+        case "auth/wrong-password":
+
+            return "كلمة المرور غير صحيحة.";
+
+        case "auth/invalid-credential":
+
+            return "الإيميل أو كلمة المرور غير صحيحة.";
+
+        case "auth/too-many-requests":
+
+            return "محاولات كتير. استنى شوية وجرب تاني.";
+
+        default:
+
+            return "حصل خطأ. حاول مرة تانية.";
+    }
+
+}
+
+
+/* =========================================
+   تنفيذ الدخول / التسجيل
+========================================= */
+
+async function submitAuth() {
+
+    clearMessage();
+
+    const email =
+        emailInput.value.trim();
+
+    const password =
+        passwordInput.value;
+
+    const name =
+        nameInput.value.trim();
+
+
+    if (!email || !password) {
+
+        showMessage(
+            "اكتب الإيميل وكلمة المرور.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (mode === "register" && !name) {
+
+        showMessage(
+            "اكتب اسم اللاعب.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if (
+        mode === "register" &&
+        name.length < 2
+    ) {
+
+        showMessage(
+            "اسم اللاعب لازم يكون حرفين على الأقل.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    submitBtn.disabled = true;
+
+    submitBtn.textContent =
+        "جاري التنفيذ...";
+
+
+    try {
+
+
+        /* =========================
+           REGISTER
+        ========================== */
+
+        if (mode === "register") {
+
+            const userCredential =
+                await firebase.auth()
+                    .createUserWithEmailAndPassword(
+                        email,
+                        password
+                    );
+
+
+            const user =
+                userCredential.user;
+
+
+            await db
+                .collection("users")
+                .doc(user.uid)
+                .set({
+
+                    uid: user.uid,
+
+                    name: name,
+
+                    email: user.email,
+
+                    createdAt:
+                        firebase.firestore.FieldValue.serverTimestamp()
+
+                });
+
+
+            await user.updateProfile({
+
+                displayName: name
+
+            });
+
+
+            showMessage(
+                "تم إنشاء الحساب بنجاح 🎉",
+                "success"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "index.html";
+
+                },
+                700
+            );
+
+
+        }
+
+
+        /* =========================
+           LOGIN
+        ========================== */
+
+        else {
+
+            await firebase.auth()
+                .signInWithEmailAndPassword(
+                    email,
+                    password
+                );
+
+
+            showMessage(
+                "تم تسجيل الدخول بنجاح 👋",
+                "success"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "index.html";
+
+                },
+                500
+            );
+
+        }
+
+    }
+
+
+    catch(error) {
+
+        console.error(error);
+
+        showMessage(
+            getAuthError(error),
+            "error"
+        );
+
+        submitBtn.disabled = false;
+
+        submitBtn.textContent =
+            mode === "login"
+                ? "تسجيل الدخول"
+                : "إنشاء الحساب";
+    }
+
+}
+/* =========================================
+   حفظ المستخدم الاجتماعي
+========================================= */
+
+async function saveSocialUser(user) {
+
+    const userRef =
+        db
+            .collection("users")
+            .doc(user.uid);
+
+
+    const userDoc =
+        await userRef.get();
+
+
+    if (!userDoc.exists) {
+
+        await userRef.set({
+
+            uid: user.uid,
+
+            name:
+                user.displayName ||
+                "لاعب Tofaa",
+
+            email:
+                user.email || "",
+
+            photoURL:
+                user.photoURL || "",
+
+            createdAt:
+                firebase.firestore.FieldValue.serverTimestamp()
+
+        });
+
+    }
+
+}
+
+
+/* =========================================
+   أخطاء تسجيل الدخول الاجتماعي
+========================================= */
+
+function getSocialAuthError(error) {
+
+    switch (error.code) {
+
+        case "auth/popup-closed-by-user":
+
+            return "تم إغلاق نافذة تسجيل الدخول.";
+
+        case "auth/popup-blocked":
+
+            return "المتصفح منع نافذة تسجيل الدخول.";
+
+        case "auth/cancelled-popup-request":
+
+            return "تم إلغاء عملية تسجيل الدخول.";
+
+        case "auth/account-exists-with-different-credential":
+
+            return "الإيميل ده مرتبط بطريقة تسجيل دخول مختلفة.";
+
+        case "auth/operation-not-allowed":
+
+            return "طريقة تسجيل الدخول دي مش مفعلة في Firebase.";
+
+        case "auth/unauthorized-domain":
+
+            return "الدومين الحالي غير مضاف إلى Authorized domains في Firebase.";
+
+        case "auth/network-request-failed":
+
+            return "مشكلة في الاتصال بالإنترنت. حاول مرة تانية.";
+
+        default:
+
+            return "حصل خطأ أثناء تسجيل الدخول. حاول مرة تانية.";
+
+    }
+
+}
+
+
+/* =========================================
+   لو المستخدم داخل بالفعل
+========================================= */
+
+firebase.auth()
+    .onAuthStateChanged(
+        function(user) {
+
+            if (user) {
+
+                window.location.href =
+                    "index.html";
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>

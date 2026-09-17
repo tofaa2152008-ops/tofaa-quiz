@@ -5,172 +5,2302 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Tofaa Quiz 🎮</title>
+    <title>Tofaa Quiz - اختبر معلوماتك</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(124, 58, 237, 0.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    rgba(34, 211, 238, 0.10),
+                    transparent 35%
+                ),
+                #0F172A;
+
+            color: #F8FAFC;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .header {
+            width: 100%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 7%;
+
+            background: rgba(15, 23, 42, 0.90);
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.06);
+
+            backdrop-filter: blur(15px);
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #F8FAFC;
+        }
+
+        .logo span {
+            color: #22D3EE;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #CBD5E1;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: 0.25s;
+        }
+
+        nav a:hover {
+            background: #1E293B;
+            color: #22D3EE;
+            transform: translateY(-2px);
+        }
+
+        .auth-button {
+            background: #7C3AED;
+            color: #F8FAFC !important;
+
+            padding: 10px 18px;
+            border-radius: 12px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .auth-button:hover {
+            background: #6D28D9;
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================================
+           HERO
+        ========================================= */
+
+        .hero {
+            max-width: 1100px;
+            min-height: 520px;
+
+            margin: auto;
+            padding: 80px 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+
+            background: rgba(124, 58, 237, 0.15);
+
+            border:
+                1px solid rgba(124, 58, 237, 0.4);
+
+            color: #C4B5FD;
+
+            padding: 9px 16px;
+
+            border-radius: 50px;
+
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 7vw, 70px);
+
+            line-height: 1.15;
+
+            margin-bottom: 20px;
+
+            font-weight: 900;
+        }
+
+        .hero h1 span {
+            background:
+                linear-gradient(
+                    90deg,
+                    #7C3AED,
+                    #22D3EE
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: #94A3B8;
+
+            font-size: 20px;
+            line-height: 1.8;
+
+            max-width: 650px;
+
+            margin: auto;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+        }
+
+        .start-btn {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7C3AED,
+                    #2563EB
+                );
+
+            color: white;
+
+            padding: 15px 28px;
+
+            border-radius: 15px;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            box-shadow:
+                0 10px 30px
+                rgba(124, 58, 237, 0.25);
+
+            transition: 0.25s;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 15px 40px
+                rgba(124, 58, 237, 0.35);
+        }
+
+        .secondary-btn {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 15px 25px;
+
+            border-radius: 15px;
+
+            background: #1E293B;
+
+            border:
+                1px solid #334155;
+
+            color: #F8FAFC;
+
+            font-weight: bold;
+
+            transition: 0.25s;
+        }
+
+        .secondary-btn:hover {
+            background: #334155;
+            transform: translateY(-3px);
+        }
+
+
+        /* =========================================
+           QUICK CARDS
+        ========================================= */
+
+        .quick-section {
+            max-width: 1100px;
+
+            margin: -20px auto 60px;
+
+            padding: 0 20px;
+        }
+
+        .quick-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+        }
+
+        .quick-card {
+            background:
+                rgba(30, 41, 59, 0.85);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.06);
+
+            border-radius: 20px;
+
+            padding: 24px;
+
+            text-align: center;
+
+            transition: 0.25s;
+        }
+
+        .quick-card:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(124, 58, 237, 0.5);
+
+            background: #1E293B;
+        }
+
+        .quick-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .quick-card h3 {
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .quick-card p {
+            color: #94A3B8;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           DAILY CHALLENGE
+        ========================================= */
+
+        .daily-section {
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 0 20px 70px;
+        }
+
+        .daily-card {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124, 58, 237, 0.22),
+                    rgba(34, 211, 238, 0.08)
+                );
+
+            border:
+                1px solid rgba(124, 58, 237, 0.4);
+
+            border-radius: 25px;
+
+            padding: 30px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 25px;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .daily-card::after {
+            content: "🎯";
+
+            position: absolute;
+
+            font-size: 140px;
+
+            left: -10px;
+            bottom: -45px;
+
+            opacity: 0.06;
+        }
+
+        .daily-info {
+            position: relative;
+            z-index: 2;
+        }
+
+        .daily-title {
+            font-size: 28px;
+
+            font-weight: 900;
+
+            margin-bottom: 10px;
+        }
+
+        .daily-info p {
+            color: #94A3B8;
+
+            line-height: 1.8;
+
+            max-width: 650px;
+        }
+
+        .daily-progress {
+            margin-top: 20px;
+
+            max-width: 650px;
+        }
+
+        .daily-progress-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 8px;
+
+            color: #CBD5E1;
+
+            font-size: 13px;
+        }
+
+        .daily-progress-top strong {
+            color: #22D3EE;
+        }
+
+        .daily-progress-bar {
+            width: 100%;
+
+            height: 9px;
+
+            background: #0F172A;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            border:
+                1px solid #293548;
+        }
+
+        .daily-progress-fill {
+            width: 0%;
+
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7C3AED,
+                    #22D3EE
+                );
+
+            border-radius: 20px;
+
+            transition: width 0.4s ease;
+        }
+
+        .daily-stats {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-top: 16px;
+        }
+
+        .daily-stat {
+            background:
+                rgba(15, 23, 42, 0.55);
+
+            border:
+                1px solid rgba(255,255,255,0.06);
+
+            padding: 8px 13px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            color: #CBD5E1;
+        }
+
+        .daily-stat strong {
+            color: #F8FAFC;
+        }
+
+        .daily-action {
+            position: relative;
+            z-index: 2;
+        }
+
+        .daily-btn {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #7C3AED;
+
+            color: white;
+
+            padding: 15px 24px;
+
+            border-radius: 14px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+            transition: 0.25s;
+        }
+
+        .daily-btn:hover {
+            background: #6D28D9;
+
+            transform: translateY(-3px);
+        }
+
+        .daily-btn.completed {
+            background: #166534;
+
+            cursor: default;
+        }
+
+        .daily-login-message {
+            margin-top: 12px;
+
+            color: #94A3B8;
+
+            font-size: 13px;
+        }
+
+        .daily-login-message.success {
+            color: #22C55E;
+        }
+
+
+        /* =========================================
+           SECTION TITLE
+        ========================================= */
+
+        .section-title {
+            max-width: 1100px;
+
+            margin: 0 auto 30px;
+
+            padding: 0 20px;
+
+            text-align: center;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+
+            margin-bottom: 10px;
+
+            font-weight: 900;
+        }
+
+        .section-title p {
+            color: #94A3B8;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================================
+           CATEGORIES
+        ========================================= */
+
+        .challenges {
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 0 20px 70px;
+        }
+
+        .challenge-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 16px;
+        }
+
+        .challenge-card {
+            position: relative;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(30, 41, 59, 0.96),
+                    rgba(15, 23, 42, 0.96)
+                );
+
+            border:
+                1px solid #29384F;
+
+            border-radius: 20px;
+
+            padding: 24px;
+
+            min-height: 230px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            transition: 0.3s;
+
+            overflow: hidden;
+        }
+
+        .challenge-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 90px;
+            height: 90px;
+
+            background:
+                rgba(124, 58, 237, 0.08);
+
+            border-radius: 50%;
+
+            top: -30px;
+            left: -30px;
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-7px);
+
+            border-color:
+                rgba(124, 58, 237, 0.7);
+
+            box-shadow:
+                0 15px 35px
+                rgba(0, 0, 0, 0.25);
+        }
+
+        .card-icon {
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                rgba(124, 58, 237, 0.13);
+
+            border-radius: 17px;
+
+            font-size: 30px;
+
+            margin-bottom: 18px;
+        }
+
+        .challenge-card h3 {
+            font-size: 18px;
+
+            margin-bottom: 8px;
+        }
+
+        .challenge-card p {
+            color: #94A3B8;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            flex: 1;
+        }
+
+        .challenge-card span {
+            color: #A78BFA;
+
+            font-weight: bold;
+
+            font-size: 13px;
+
+            margin-top: 18px;
+        }
+
+        .card-count {
+            color: #64748B;
+
+            font-size: 11px;
+
+            margin-top: 7px;
+        }
+
+
+        /* =========================================
+           SPECIAL CHALLENGES
+        ========================================= */
+
+        .special-section {
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 0 20px 80px;
+        }
+
+        .special-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 16px;
+        }
+
+        .special-card {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124, 58, 237, 0.16),
+                    rgba(30, 41, 59, 0.96)
+                );
+
+            border:
+                1px solid rgba(124, 58, 237, 0.35);
+
+            border-radius: 22px;
+
+            padding: 25px;
+
+            min-height: 245px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            transition: 0.3s;
+        }
+
+        .special-card:hover {
+            transform: translateY(-7px);
+
+            border-color: #7C3AED;
+
+            box-shadow:
+                0 15px 40px
+                rgba(124, 58, 237, 0.15);
+        }
+
+        .special-card h3 {
+            font-size: 19px;
+
+            margin-bottom: 9px;
+        }
+
+        .special-card p {
+            color: #94A3B8;
+
+            line-height: 1.7;
+
+            font-size: 13px;
+
+            flex: 1;
+        }
+
+        .special-card span {
+            color: #C4B5FD;
+
+            font-weight: bold;
+
+            margin-top: 18px;
+
+            font-size: 13px;
+        }
+
+        .vip-special {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(234, 179, 8, 0.12),
+                    rgba(30, 41, 59, 0.98)
+                );
+
+            border-color:
+                rgba(234, 179, 8, 0.35);
+        }
+
+        .vip-special:hover {
+            border-color: #EAB308;
+
+            box-shadow:
+                0 15px 40px
+                rgba(234, 179, 8, 0.12);
+        }
+
+        .vip-special span {
+            color: #FACC15;
+        }
+
+
+        /* =========================================
+           CTA
+        ========================================= */
+
+        .cta {
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 0 20px 80px;
+        }
+
+        .cta-box {
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124, 58, 237, 0.18),
+                    rgba(34, 211, 238, 0.07)
+                );
+
+            border:
+                1px solid rgba(124, 58, 237, 0.3);
+
+            border-radius: 25px;
+
+            padding: 50px 25px;
+        }
+
+        .cta-box h2 {
+            font-size: 30px;
+
+            margin-bottom: 12px;
+        }
+
+        .cta-box p {
+            color: #94A3B8;
+
+            margin-bottom: 25px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            border-top:
+                1px solid rgba(255,255,255,0.06);
+
+            padding: 30px 20px;
+
+            text-align: center;
+
+            color: #64748B;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .header {
+                padding: 15px 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .challenge-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .special-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .daily-card {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .daily-action {
+                width: 100%;
+            }
+
+            .daily-btn {
+                width: 100%;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .hero {
+                min-height: 460px;
+
+                padding:
+                    60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .quick-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .challenge-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .special-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .daily-card {
+                padding: 22px;
+            }
+
+            .daily-title {
+                font-size: 24px;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            nav a {
+                font-size: 13px;
+                padding: 8px 10px;
+            }
+
+            .section-title h2 {
+                font-size: 27px;
+            }
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-    <!-- الهيدر -->
-    <header>
 
-        <div class="logo">
-            Tofaa 🎮
-        </div>
+<!-- =========================================
+     HEADER
+========================================= -->
 
-        <nav>
-            <a href="index.html">الرئيسية</a>
-            <a href="#challenges">التحديات</a>
-            <a href="leaderboard.html">المتصدرين</a>
-        </nav>
+<header class="header">
 
-        <a href="profile.html" class="profile">
-            👤 حسابي
+    <a href="index.html" class="logo">
+        Tofaa <span>Quiz</span>
+    </a>
+
+    <nav>
+
+        <a href="index.html">
+            الرئيسية
         </a>
 
-    </header>
+        <a href="#challenges">
+            التحديات
+        </a>
+
+        <a href="leaderboard.html">
+            🏆 المتصدرين
+        </a>
+
+        <a href="store.html">
+            🛒 المتجر
+        </a>
+
+        <a
+            href="login.html"
+            class="auth-button"
+            id="authButton"
+        >
+            🔐 تسجيل الدخول
+        </a>
+
+    </nav>
+
+</header>
 
 
-    <!-- المحتوى الرئيسي -->
-    <main>
 
-        <!-- القسم الرئيسي -->
-        <section class="hero">
-
-            <div class="hero-text">
-
-                <span class="badge">
-                    🎮 تحدى نفسك
-                </span>
-
-                <h1>
-                    اختبر معلوماتك
-                    <br>
-                    وارفع مستواك 🚀
-                </h1>
-
-                <p>
-                    جاوب على الأسئلة، اجمع النقاط،
-                    ونافس أصحابك على صدارة الترتيب!
-                </p>
-
-                <button class="start-btn">
-                    🚀 ابدأ اللعب
-                </button>
-
-            </div>
-
-        </section>
+<main>
 
 
-        <!-- التحديات -->
-        <section class="challenges" id="challenges">
+<!-- =========================================
+     HERO
+========================================= -->
 
-            <div class="section-title">
+<section class="hero">
 
-                <span class="badge">
-                    🔥 التحديات
-                </span>
+    <div class="hero-content">
 
-                <h2>
-                    اختار تحديك
-                </h2>
+        <div class="hero-badge">
+            🎮 مرحبًا بك في Tofaa Quiz
+        </div>
 
-                <p>
-                    جاهز تختبر نفسك؟
-                </p>
-
-            </div>
-
-
-            <div class="challenge-grid">
-
-                <!-- تحدي معلومات عامة -->
-                <div class="challenge-card">
-
-                    <div class="challenge-icon">
-                        🧠
-                    </div>
-
-                    <h3>
-                        معلومات عامة
-                    </h3>
-
-                    <p>
-                        اختبر معلوماتك في أسئلة متنوعة.
-                    </p>
-
-                    <span>
-                        ⭐ 5 أسئلة
-                    </span>
-
-                </div>
-
-
-                <!-- تحدي العلوم -->
-                <div class="challenge-card">
-
-                    <div class="challenge-icon">
-                        🔬
-                    </div>
-
-                    <h3>
-                        علوم
-                    </h3>
-
-                    <p>
-                        أسئلة ممتعة في العلوم.
-                    </p>
-
-                    <span>
-                        ⭐ 5 أسئلة
-                    </span>
-
-                </div>
-
-
-                <!-- تحدي الرياضيات -->
-                <div class="challenge-card">
-
-                    <div class="challenge-icon">
-                        🧮
-                    </div>
-
-                    <h3>
-                        رياضيات
-                    </h3>
-
-                    <p>
-                        شوف سرعتك في حل المسائل.
-                    </p>
-
-                    <span>
-                        ⭐ 5 أسئلة
-                    </span>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- الفوتر -->
-    <footer>
+        <h1>
+            اختبر معلوماتك
+            <br>
+            <span>وتحدى نفسك</span>
+        </h1>
 
         <p>
-            © 2026 Tofaa Quiz 🎮
+            العب، جاوب، اجمع النقاط والعملات،
+            ونافس اللاعبين للوصول إلى قمة المتصدرين.
         </p>
 
-    </footer>
+        <div class="hero-buttons">
+
+            <a
+                href="#challenges"
+                class="start-btn"
+            >
+                🎯 ابدأ اللعب
+            </a>
+
+            <a
+                href="leaderboard.html"
+                class="secondary-btn"
+            >
+                🏆 المتصدرين
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
 
 
-    <!-- ملفات JavaScript -->
-    <script src="question.js"></script>
-    <script src="script.js"></script>
+
+<!-- =========================================
+     QUICK CARDS
+========================================= -->
+
+<section class="quick-section">
+
+    <div class="quick-grid">
+
+        <a
+            href="#challenges"
+            class="quick-card"
+        >
+
+            <div class="quick-icon">
+                🎯
+            </div>
+
+            <h3>
+                16 قسم مختلف
+            </h3>
+
+            <p>
+                اختار المجال اللي بتحبه واختبر نفسك.
+            </p>
+
+        </a>
+
+
+        <a
+            href="quiz.html?daily=true"
+            class="quick-card"
+        >
+
+            <div class="quick-icon">
+                🔥
+            </div>
+
+            <h3>
+                تحدي يومي
+            </h3>
+
+            <p>
+                تحدي جديد كل يوم ومكافآت إضافية.
+            </p>
+
+        </a>
+
+
+        <a
+            href="leaderboard.html"
+            class="quick-card"
+        >
+
+            <div class="quick-icon">
+                🏆
+            </div>
+
+            <h3>
+                نافس الجميع
+            </h3>
+
+            <p>
+                اجمع النقاط وحاول توصل للمركز الأول.
+            </p>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     DAILY CHALLENGE
+========================================= -->
+
+<section class="daily-section">
+
+    <div class="daily-card">
+
+        <div class="daily-info">
+
+            <h2
+                class="daily-title"
+                id="dailyTitle"
+            >
+                🎯 التحدي اليومي
+            </h2>
+
+            <p id="dailyDescription">
+                كل يوم عندك تحدي جديد.
+                حقق 5 إجابات صحيحة وحافظ على الـ Streak بتاعك.
+            </p>
+
+
+            <div class="daily-progress">
+
+                <div class="daily-progress-top">
+
+                    <span>
+                        التقدم اليومي
+                    </span>
+
+                    <strong id="dailyProgressText">
+                        0 / 5
+                    </strong>
+
+                </div>
+
+
+                <div class="daily-progress-bar">
+
+                    <div
+                        class="daily-progress-fill"
+                        id="dailyProgressBar"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="daily-stats">
+
+                <div class="daily-stat">
+                    🔥 Streak:
+                    <strong id="dailyStreak">
+                        0 يوم
+                    </strong>
+                </div>
+
+                <div class="daily-stat">
+                    🪙 المكافأة:
+                    <strong>
+                        500 نقطة + 200 XP
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div
+                class="daily-login-message"
+                id="dailyLoginMessage"
+            >
+                سجّل الدخول للعب التحدي اليومي
+            </div>
+
+        </div>
+
+
+        <div class="daily-action">
+
+            <a
+                href="quiz.html?daily=true"
+                class="daily-btn"
+                id="dailyButton"
+            >
+                ابدأ التحدي →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     SECTION TITLE
+========================================= -->
+
+<div class="section-title">
+
+    <h2>
+        🎯 اختر القسم
+    </h2>
+
+    <p>
+        عندك 16 قسم مختلف — اختار اللي يناسبك وابدأ التحدي
+    </p>
+
+</div>
+
+
+
+<!-- =========================================
+     16 CATEGORIES
+========================================= -->
+
+<section
+    class="challenges"
+    id="challenges"
+>
+
+    <div class="challenge-grid">
+
+
+        <!-- 1 -->
+
+        <a
+            href="quiz.html?category=general"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                🧠
+            </div>
+
+            <h3>
+                معلومات عامة
+            </h3>
+
+            <p>
+                أسئلة متنوعة تختبر معلوماتك في مجالات مختلفة.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                150 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 2 -->
+
+        <a
+            href="quiz.html?category=science"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                🔬
+            </div>
+
+            <h3>
+                علوم
+            </h3>
+
+            <p>
+                أسئلة عن الفيزياء والكيمياء والأحياء والعلوم.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                120 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 3 -->
+
+        <a
+            href="quiz.html?category=geography"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                🌍
+            </div>
+
+            <h3>
+                جغرافيا
+            </h3>
+
+            <p>
+                دول وعواصم وقارات ومعلومات عن العالم.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                120 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 4 -->
+
+        <a
+            href="quiz.html?category=history"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                🏛️
+            </div>
+
+            <h3>
+                تاريخ
+            </h3>
+
+            <p>
+                اختبر معلوماتك عن الحضارات والأحداث التاريخية.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                120 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 5 -->
+
+        <a
+            href="quiz.html?category=math"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                ➗
+            </div>
+
+            <h3>
+                رياضيات
+            </h3>
+
+            <p>
+                مسائل وحسابات وتحديات رياضية متنوعة.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                120 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 6 -->
+
+        <a
+            href="quiz.html?category=technology"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                💻
+            </div>
+
+            <h3>
+                تكنولوجيا
+            </h3>
+
+            <p>
+                كمبيوتر وبرمجة وإنترنت وتقنيات حديثة.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                100 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 7 -->
+
+        <a
+            href="quiz.html?category=sports"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                ⚽
+            </div>
+
+            <h3>
+                رياضة
+            </h3>
+
+            <p>
+                كرة القدم والرياضات المختلفة والبطولات.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                120 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 8 -->
+
+        <a
+            href="quiz.html?category=games"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                🎮
+            </div>
+
+            <h3>
+                ألعاب
+            </h3>
+
+            <p>
+                اختبر معلوماتك عن ألعاب الفيديو والشخصيات.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                120 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 9 -->
+
+        <a
+            href="quiz.html?category=movies"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                🎬
+            </div>
+
+            <h3>
+                أفلام ومسلسلات
+            </h3>
+
+            <p>
+                أسئلة عن الأفلام والمسلسلات والشخصيات.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                100 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 10 -->
+
+        <a
+            href="quiz.html?category=music"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                🎵
+            </div>
+
+            <h3>
+                موسيقى
+            </h3>
+
+            <p>
+                اختبر معلوماتك عن الموسيقى والفنانين والأنواع.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                100 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 11 -->
+
+        <a
+            href="quiz.html?category=english"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                🇬🇧
+            </div>
+
+            <h3>
+                اللغة الإنجليزية
+            </h3>
+
+            <p>
+                كلمات وقواعد ومفردات باللغة الإنجليزية.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                100 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 12 -->
+
+        <a
+            href="quiz.html?category=riddles"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                🧩
+            </div>
+
+            <h3>
+                ألغاز وذكاء
+            </h3>
+
+            <p>
+                ألغاز وتحديات تحتاج تركيز وتفكير سريع.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                120 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 13 -->
+
+        <a
+            href="quiz.html?category=space"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                🚀
+            </div>
+
+            <h3>
+                فضاء وفلك
+            </h3>
+
+            <p>
+                الكواكب والنجوم والمجرات وأسرار الكون.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                100 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 14 -->
+
+        <a
+            href="quiz.html?category=animals"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                🐾
+            </div>
+
+            <h3>
+                حيوانات وطبيعة
+            </h3>
+
+            <p>
+                عالم الحيوانات والبيئة والطبيعة.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                100 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 15 -->
+
+        <a
+            href="quiz.html?category=food"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                🍔
+            </div>
+
+            <h3>
+                أكل ومأكولات
+            </h3>
+
+            <p>
+                أكلات ومطابخ ومعلومات ممتعة عن الطعام.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                80 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+        <!-- 16 -->
+
+        <a
+            href="quiz.html?category=egypt"
+            class="challenge-card"
+        >
+
+            <div class="card-icon">
+                🇪🇬
+            </div>
+
+            <h3>
+                مصر
+            </h3>
+
+            <p>
+                اختبر معلوماتك عن مصر وتاريخها ومعالمها.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+            <small class="card-count">
+                120 سؤال تقريبًا
+            </small>
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     SPECIAL CHALLENGES
+========================================= -->
+
+<div class="section-title">
+
+    <h2>
+        ⚡ تحديات خاصة
+    </h2>
+
+    <p>
+        أنماط لعب مختلفة للاعبين اللي عايزين تحدي أقوى
+    </p>
+
+</div>
+
+
+<section class="special-section">
+
+    <div class="special-grid">
+
+
+        <!-- QUICK -->
+
+        <a
+            href="quiz.html?mode=quick"
+            class="special-card"
+        >
+
+            <div class="card-icon">
+                ⚡
+            </div>
+
+            <h3>
+                تحدي سريع
+            </h3>
+
+            <p>
+                أسئلة سريعة لاختبار سرعة التفكير ورد الفعل.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+        </a>
+
+
+        <!-- HARD -->
+
+        <a
+            href="quiz.html?mode=hard"
+            class="special-card"
+        >
+
+            <div class="card-icon">
+                💀
+            </div>
+
+            <h3>
+                التحدي الصعب
+            </h3>
+
+            <p>
+                أسئلة أصعب للاعبين اللي عايزين يرفعوا مستواهم.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+        </a>
+
+
+        <!-- MIXED -->
+
+        <a
+            href="quiz.html?mode=mixed"
+            class="special-card"
+        >
+
+            <div class="card-icon">
+                🎲
+            </div>
+
+            <h3>
+                اختبار شامل
+            </h3>
+
+            <p>
+                أسئلة متنوعة من جميع الأقسام في اختبار واحد.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+        </a>
+
+
+        <!-- VIP -->
+
+        <a
+            href="quiz.html?mode=vip"
+            class="special-card vip-special"
+        >
+
+            <div class="card-icon">
+                💎
+            </div>
+
+            <h3>
+                VIP Challenge
+            </h3>
+
+            <p>
+                تحدي خاص للاعبي VIP مع مكافآت العملات المميزة.
+            </p>
+
+            <span>
+                ابدأ التحدي →
+            </span>
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     CTA
+========================================= -->
+
+<section class="cta">
+
+    <div class="cta-box">
+
+        <h2>
+            🏆 هل تستطيع الوصول للقمة؟
+        </h2>
+
+        <p>
+            العب أكثر، اجمع نقاط أكثر، ونافس اللاعبين على المتصدرين.
+        </p>
+
+        <a
+            href="leaderboard.html"
+            class="start-btn"
+        >
+            🏆 شاهد المتصدرين
+        </a>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <p>
+        ©️ 2026 Tofaa Quiz — جميع الحقوق محفوظة
+    </p>
+
+</footer>
+
+
+
+<!-- =========================================
+     FIREBASE
+========================================= -->
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
+
+<script src="firebase.js"></script>
+
+
+
+<script>
+
+    /* =========================================
+       DAILY CHALLENGE
+    ========================================= */
+
+    const DAILY_TARGET = 5;
+
+
+    function getEgyptDate() {
+
+        return new Intl.DateTimeFormat(
+            "en-CA",
+            {
+                timeZone: "Africa/Cairo",
+
+                year: "numeric",
+
+                month: "2-digit",
+
+                day: "2-digit"
+            }
+        ).format(new Date());
+
+    }
+
+
+    function updateDailyUI(
+        progress,
+        streak,
+        completed
+    ) {
+
+        const progressText =
+            document.getElementById(
+                "dailyProgressText"
+            );
+
+
+        const progressBar =
+            document.getElementById(
+                "dailyProgressBar"
+            );
+
+
+        const streakElement =
+            document.getElementById(
+                "dailyStreak"
+            );
+
+
+        const button =
+            document.getElementById(
+                "dailyButton"
+            );
+
+
+        const title =
+            document.getElementById(
+                "dailyTitle"
+            );
+
+
+        const description =
+            document.getElementById(
+                "dailyDescription"
+            );
+
+
+        const message =
+            document.getElementById(
+                "dailyLoginMessage"
+            );
+
+
+        const safeProgress =
+            Math.min(
+                Number(progress || 0),
+                DAILY_TARGET
+            );
+
+
+        progressText.textContent =
+            safeProgress +
+            " / " +
+            DAILY_TARGET;
+
+
+        const percentage =
+            (
+                safeProgress /
+                DAILY_TARGET
+            ) * 100;
+
+
+        progressBar.style.width =
+            percentage + "%";
+
+
+        streakElement.textContent =
+            Number(streak || 0) +
+            " يوم";
+
+
+        if (completed) {
+
+            title.textContent =
+                "✅ التحدي اليومي مكتمل";
+
+
+            description.textContent =
+                "أحسنت! خلصت تحدي النهارده بالفعل. ارجع بكرة لتحدي جديد وحافظ على الـ Streak 🔥";
+
+
+            button.textContent =
+                "✅ مكتمل اليوم";
+
+
+            button.classList.add(
+                "completed"
+            );
+
+
+            button.removeAttribute(
+                "href"
+            );
+
+
+            message.textContent =
+                "🎉 حصلت على مكافأة التحدي اليومي!";
+
+
+            message.classList.add(
+                "success"
+            );
+
+        }
+
+        else {
+
+            title.textContent =
+                "🎯 التحدي اليومي";
+
+
+            description.textContent =
+                "كل يوم عندك تحدي جديد. حقق 5 إجابات صحيحة وحافظ على الـ Streak بتاعك.";
+
+
+            button.textContent =
+                "ابدأ التحدي →";
+
+
+            button.href =
+                "quiz.html?daily=true";
+
+
+            button.classList.remove(
+                "completed"
+            );
+
+
+            message.textContent =
+                "كمّل 5 إجابات صحيحة للحصول على المكافأة.";
+
+
+            message.classList.remove(
+                "success"
+            );
+
+        }
+
+    }
+
+
+
+    async function loadDailyChallenge() {
+
+        try {
+
+            const user =
+                firebase.auth().currentUser;
+
+
+            if (!user) {
+
+                updateDailyUI(
+                    0,
+                    0,
+                    false
+                );
+
+                document.getElementById(
+                    "dailyLoginMessage"
+                ).textContent =
+                    "سجّل الدخول للعب التحدي اليومي";
+
+                return;
+            }
+
+
+            const today =
+                getEgyptDate();
+
+
+            const doc =
+                await db
+                    .collection(
+                        "dailyChallenges"
+                    )
+                    .doc(
+                        user.uid
+                    )
+                    .get();
+
+
+            if (!doc.exists) {
+
+                updateDailyUI(
+                    0,
+                    0,
+                    false
+                );
+
+                document.getElementById(
+                    "dailyLoginMessage"
+                ).textContent =
+                    "ابدأ التحدي اليومي اليوم!";
+
+                return;
+            }
+
+
+            const data =
+                doc.data();
+
+
+            const completed =
+                data.completedDate === today;
+
+
+            const progress =
+                completed
+                    ? DAILY_TARGET
+                    : Number(
+                        data.progress || 0
+                    );
+
+
+            const streak =
+                Number(
+                    data.streak || 0
+                );
+
+
+            updateDailyUI(
+                progress,
+                streak,
+                completed
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Daily Challenge Error:",
+                error
+            );
+
+        }
+
+    }
+
+
+
+    /* =========================================
+       AUTH BUTTON
+    ========================================= */
+
+    function setupAuthButton() {
+
+        const authButton =
+            document.getElementById(
+                "authButton"
+            );
+
+
+        if (!authButton) {
+            return;
+        }
+
+
+        firebase.auth().onAuthStateChanged(
+            function(user) {
+
+                if (user) {
+
+                    const playerName =
+                        user.displayName ||
+                        (
+                            user.email
+                                ? user.email.split("@")[0]
+                                : "اللاعب"
+                        );
+
+
+                    authButton.textContent =
+                        "👤 " + playerName;
+
+
+                    authButton.href =
+                        "profile.html";
+
+                }
+
+                else {
+
+                    authButton.textContent =
+                        "🔐 تسجيل الدخول";
+
+
+                    authButton.href =
+                        "login.html";
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================
+       START
+    ========================================= */
+
+    firebase.auth().onAuthStateChanged(
+        function(user) {
+
+            loadDailyChallenge();
+
+        }
+    );
+
+
+    setupAuthButton();
+
+</script>
+
 
 </body>
 

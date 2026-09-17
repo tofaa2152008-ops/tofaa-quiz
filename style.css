@@ -1,217 +1,235 @@
-/* ================================
-   Tofaa Quiz 🎮
-   Main Style
-================================ */
-
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
-    margin: 0;
-    min-height: 100vh;
-
+    font-family: Arial, Tahoma, sans-serif;
     background: #0F172A;
     color: #F8FAFC;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
 
-    font-family: Tahoma, Arial, sans-serif;
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
-    direction: rtl;
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        opacity 0.2s ease;
 }
 
 
-/* ================================
-   Header
-================================ */
+/* ======================================================
+   ===================== HEADER ==========================
+   ====================================================== */
 
-header {
-    min-height: 75px;
-
-    padding: 15px 6%;
-
+.header {
+    width: 100%;
+    padding: 20px 7%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 25px;
-
+    align-items: center;
     background: #111827;
+    border-bottom: 1px solid #29384F;
 
-    border-bottom: 1px solid #243047;
+    animation: headerIn 0.6s ease both;
 }
 
 .logo {
-    color: #22D3EE;
-
     font-size: 25px;
-    font-weight: bold;
+    font-weight: 900;
+    color: #F8FAFC;
+    letter-spacing: 1px;
 
-    white-space: nowrap;
+    transition:
+        transform 0.25s ease,
+        text-shadow 0.25s ease;
+}
+
+.logo span {
+    color: #7C3AED;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    text-shadow:
+        0 0 18px rgba(124, 58, 237, 0.5);
 }
 
 nav {
     display: flex;
-    align-items: center;
     gap: 25px;
 }
 
-nav a,
-.profile {
-    color: #F8FAFC;
+nav a {
+    position: relative;
 
-    text-decoration: none;
-
-    font-size: 16px;
+    color: #94A3B8;
     font-weight: bold;
 
-    transition: 0.2s;
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
 }
 
-nav a:hover,
-.profile:hover {
+nav a::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -7px;
+
+    height: 2px;
+
+    background: #22D3EE;
+
+    transform: scaleX(0);
+    transform-origin: center;
+
+    transition: transform 0.25s ease;
+}
+
+nav a:hover {
     color: #22D3EE;
+    transform: translateY(-2px);
+}
+
+nav a:hover::after {
+    transform: scaleX(1);
 }
 
 
-/* ================================
-   Main
-================================ */
-
-main {
-    min-height: calc(100vh - 140px);
-}
-
-
-/* ================================
-   Badge
-================================ */
-
-.badge {
-    display: inline-block;
-
-    padding: 8px 15px;
-
-    background: rgba(124, 58, 237, 0.15);
-
-    color: #A78BFA;
-
-    border: 1px solid #7C3AED;
-
-    border-radius: 50px;
-
-    font-size: 14px;
-    font-weight: bold;
-}
-
-
-/* ================================
-   Hero
-================================ */
+/* ======================================================
+   ====================== HERO ===========================
+   ====================================================== */
 
 .hero {
-    min-height: 520px;
+    min-height: 430px;
 
     display: flex;
-    align-items: center;
     justify-content: center;
-
-    padding: 60px 20px;
+    align-items: center;
 
     text-align: center;
 
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(124, 58, 237, 0.18),
-            transparent 55%
-        );
-}
+    padding: 60px 20px;
 
-.hero-text {
-    max-width: 750px;
+    animation: heroIn 0.8s ease both;
 }
 
 .hero h1 {
-    margin: 25px 0 20px;
+    font-size: 50px;
+    margin-bottom: 20px;
 
-    font-size: 52px;
-    line-height: 1.3;
+    animation:
+        heroTitleIn 0.7s ease 0.1s both;
+}
+
+.hero h1 span {
+    color: #7C3AED;
 }
 
 .hero p {
-    max-width: 600px;
-
-    margin: 0 auto 30px;
-
     color: #94A3B8;
+    font-size: 20px;
+    margin-bottom: 35px;
 
-    font-size: 18px;
-    line-height: 1.8;
+    animation:
+        heroTextIn 0.7s ease 0.2s both;
 }
 
 
-/* ================================
-   Buttons
-================================ */
+/* ======================================================
+   ===================== BUTTON ==========================
+   ====================================================== */
 
 .start-btn {
-    border: none;
+    display: inline-block;
 
-    padding: 15px 30px;
+    position: relative;
+    overflow: hidden;
 
     background: #7C3AED;
-    color: white;
 
-    border-radius: 14px;
+    padding: 16px 35px;
 
-    font-size: 17px;
+    border-radius: 15px;
+
+    font-size: 18px;
     font-weight: bold;
 
-    cursor: pointer;
+    transition:
+        0.25s;
 
-    transition: 0.2s;
+    animation:
+        heroButtonIn 0.7s ease 0.3s both;
+}
+
+.start-btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.18),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.6s ease;
+}
+
+.start-btn:hover::before {
+    left: 140%;
 }
 
 .start-btn:hover {
     background: #6D28D9;
 
     transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 30px rgba(124, 58, 237, 0.35);
 }
 
-.start-btn:active {
-    transform: scale(0.97);
-}
 
-
-/* ================================
-   Challenges
-================================ */
+/* ======================================================
+   =================== CHALLENGES ========================
+   ====================================================== */
 
 .challenges {
-    max-width: 1100px;
-
-    margin: 0 auto;
-
-    padding: 70px 20px;
+    padding: 40px 7% 80px;
 }
 
-.section-title {
+.challenges h2 {
     text-align: center;
 
-    margin-bottom: 40px;
-}
+    font-size: 32px;
 
-.section-title h2 {
-    margin: 15px 0 10px;
-
-    font-size: 36px;
-}
-
-.section-title p {
-    color: #94A3B8;
+    margin-bottom: 35px;
 }
 
 .challenge-grid {
@@ -223,6 +241,8 @@ main {
 }
 
 .challenge-card {
+    display: block;
+
     padding: 30px;
 
     background: #1E293B;
@@ -233,528 +253,1400 @@ main {
 
     text-align: center;
 
-    transition: 0.25s;
+    transition:
+        0.25s;
+
+    cursor: pointer;
+
+    animation:
+        cardIn 0.55s ease both;
+}
+
+.challenge-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.challenge-card:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+.challenge-card:nth-child(3) {
+    animation-delay: 0.19s;
+}
+
+.challenge-card:nth-child(4) {
+    animation-delay: 0.26s;
+}
+
+.challenge-card:nth-child(5) {
+    animation-delay: 0.33s;
+}
+
+.challenge-card:nth-child(6) {
+    animation-delay: 0.40s;
 }
 
 .challenge-card:hover {
-    transform: translateY(-7px);
+    transform:
+        translateY(-8px)
+        scale(1.015);
 
     border-color: #7C3AED;
+
+    box-shadow:
+        0 10px 30px rgba(124, 58, 237, 0.2);
 }
 
-.challenge-icon {
-    width: 70px;
-    height: 70px;
+.card-icon {
+    font-size: 45px;
 
-    margin: 0 auto 20px;
+    margin-bottom: 15px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition:
+        transform 0.3s ease;
+}
 
-    background: #0F172A;
-
-    border-radius: 20px;
-
-    font-size: 35px;
+.challenge-card:hover .card-icon {
+    transform:
+        translateY(-4px)
+        scale(1.1)
+        rotate(3deg);
 }
 
 .challenge-card h3 {
-    margin: 10px 0;
-
-    font-size: 22px;
+    font-size: 23px;
+    margin-bottom: 10px;
 }
 
 .challenge-card p {
     color: #94A3B8;
-
-    line-height: 1.7;
-}
-
-.challenge-card span {
-    display: block;
-
-    margin-top: 20px;
-
-    color: #22D3EE;
-
-    font-weight: bold;
-}
-
-
-/* ================================
-   Footer
-================================ */
-
-footer {
-    padding: 25px;
-
-    text-align: center;
-
-    background: #111827;
-
-    border-top: 1px solid #243047;
-}
-
-footer p {
-    margin: 0;
-
-    color: #64748B;
-}
-
-
-/* ================================
-   Quiz
-================================ */
-
-.quiz-container {
-    max-width: 900px;
-
-    margin: 0 auto;
-
-    padding: 45px 20px;
-}
-
-
-/* معلومات اللعبة */
-
-.quiz-top {
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 12px;
-
     margin-bottom: 20px;
 }
 
-.quiz-top > div {
-    padding: 15px;
-
-    background: #1E293B;
-
-    border: 1px solid #29384F;
-
-    border-radius: 15px;
-
-    text-align: center;
-
-    font-weight: bold;
-}
-
-
-/* كارت السؤال */
-
-.quiz-card {
-    padding: 35px;
-
-    background: #1E293B;
-
-    border: 1px solid #29384F;
-
-    border-radius: 25px;
-
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-}
-
-.question-number {
-    display: block;
-
-    margin-bottom: 25px;
-
+.challenge-card span {
     color: #22D3EE;
-
-    text-align: center;
-
     font-weight: bold;
 }
 
-#question {
-    margin: 0 0 35px;
 
-    font-size: 32px;
+/* ======================================================
+   ====================== FOOTER =========================
+   ====================================================== */
 
-    line-height: 1.5;
-
+footer {
     text-align: center;
+
+    padding: 25px;
+
+    background: #111827;
+
+    color: #64748B;
+
+    border-top: 1px solid #29384F;
 }
 
 
-/* الاختيارات */
+/* ======================================================
+   ================= AUTH BUTTON =========================
+   ====================================================== */
 
-.answers {
-    display: grid;
+.auth-button {
+    background: #7C3AED;
 
-    grid-template-columns: repeat(2, 1fr);
+    color: #F8FAFC !important;
 
-    gap: 15px;
-}
+    padding: 10px 18px;
 
-.answer-button {
-    width: 100%;
+    border-radius: 12px;
 
-    min-height: 65px;
+    text-decoration: none;
 
-    padding: 15px;
-
-    background: #0F172A;
-
-    color: #F8FAFC;
-
-    border: 2px solid #334155;
-
-    border-radius: 15px;
-
-    font-size: 17px;
     font-weight: bold;
 
-    cursor: pointer;
+    transition: 0.3s;
 
-    transition: 0.2s;
+    display: inline-block;
 }
 
-.answer-button:hover:not(:disabled) {
-    border-color: #7C3AED;
-
-    background: #18233A;
-
+.auth-button:hover {
     transform: translateY(-2px);
-}
-
-.answer-button:disabled {
-    cursor: not-allowed;
 
     opacity: 0.9;
+
+    box-shadow:
+        0 8px 20px rgba(124, 58, 237, 0.25);
 }
 
 
-/* الرسالة */
+/* ======================================================
+   ======================= STORE =========================
+   ====================================================== */
 
-#message {
-    min-height: 30px;
+.store {
+    padding: 60px 7% 80px;
 
-    margin: 25px 0;
+    min-height:
+        calc(100vh - 150px);
+}
 
-    color: #F8FAFC;
-
+.store-header {
     text-align: center;
+
+    margin-bottom: 50px;
+
+    animation:
+        storeHeaderIn 0.6s ease both;
+}
+
+.store-header h1 {
+    font-size: 42px;
+
+    margin-bottom: 15px;
+}
+
+.store-header p {
+    color: #94A3B8;
 
     font-size: 18px;
 
-    font-weight: bold;
+    margin-bottom: 25px;
 }
 
+.coins-box {
+    display: inline-block;
 
-/* السؤال التالي */
+    background: #1E293B;
 
-.next-button {
-    display: none;
+    border: 1px solid #29384F;
 
+    padding: 12px 25px;
+
+    border-radius: 15px;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.coins-box:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(34, 211, 238, 0.1);
+}
+
+#coins {
+    color: #22D3EE;
+
+    margin: 0 5px;
+}
+
+.store-products {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    animation:
+        storeGridIn 0.6s ease 0.15s both;
+}
+
+.product-card {
+    background: #1E293B;
+
+    border: 1px solid #29384F;
+
+    border-radius: 22px;
+
+    padding: 30px 20px;
+
+    text-align: center;
+
+    transition:
+        0.25s;
+
+    animation:
+        productCardIn 0.5s ease both;
+}
+
+.product-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.product-card:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+.product-card:nth-child(3) {
+    animation-delay: 0.19s;
+}
+
+.product-card:nth-child(4) {
+    animation-delay: 0.26s;
+}
+
+.product-card:hover {
+    transform:
+        translateY(-8px)
+        scale(1.015);
+
+    border-color: #7C3AED;
+
+    box-shadow:
+        0 14px 35px rgba(124, 58, 237, 0.22);
+}
+
+.product-icon {
+    font-size: 55px;
+
+    margin-bottom: 20px;
+
+    transition:
+        transform 0.3s ease;
+}
+
+.product-card:hover .product-icon {
+    transform:
+        translateY(-5px)
+        scale(1.08);
+}
+
+.product-card h2 {
+    font-size: 22px;
+
+    margin-bottom: 12px;
+}
+
+.product-card p {
+    color: #94A3B8;
+
+    line-height: 1.6;
+
+    min-height: 50px;
+}
+
+.product-price {
+    color: #22D3EE;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin: 20px 0;
+}
+
+.buy-btn {
     width: 100%;
 
-    padding: 15px;
+    position: relative;
+    overflow: hidden;
 
     border: none;
 
     background: #7C3AED;
 
-    color: white;
+    color: #F8FAFC;
 
-    border-radius: 14px;
+    padding: 13px;
 
-    font-size: 17px;
+    border-radius: 12px;
+
+    font-size: 16px;
+
     font-weight: bold;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    transition:
+        0.25s;
 }
 
-.next-button:hover {
+.buy-btn::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.18),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    transition:
+        left 0.6s ease;
+}
+
+.buy-btn:hover::after {
+    left: 140%;
+}
+
+.buy-btn:hover {
     background: #6D28D9;
 
     transform: translateY(-2px);
 }
 
-
-/* ================================
-   Result
-================================ */
-
-.result-container {
-    min-height: 600px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 40px 20px;
+.buy-btn:disabled {
+    cursor: default;
 }
 
-.result-card {
-    width: 100%;
+.buy-btn.purchased {
+    background: #22C55E;
 
-    max-width: 600px;
-
-    padding: 45px 30px;
-
-    background: #1E293B;
-
-    border: 1px solid #29384F;
-
-    border-radius: 25px;
-
-    text-align: center;
+    animation:
+        purchasePop 0.45s ease;
 }
 
-.result-icon {
-    font-size: 70px;
+.buy-btn.equipped {
+    background: #22C55E;
 
-    margin-bottom: 15px;
+    color: #FFFFFF;
+
+    cursor: default;
+
+    box-shadow:
+        0 0 15px rgba(34, 197, 94, 0.35);
+
+    animation:
+        purchasePop 0.45s ease;
 }
 
-.result-card h1 {
-    margin: 10px 0;
-
-    font-size: 36px;
-}
-
-.result-card p {
-    color: #94A3B8;
-
-    font-size: 17px;
-}
-
-.final-score {
-    margin: 25px 0;
-
-    color: #22D3EE;
-
-    font-size: 45px;
-    font-weight: bold;
-}
-
-.home-button {
-    width: 100%;
-
-    margin-top: 12px;
-
-    padding: 14px;
-
-    background: transparent;
-
-    color: #F8FAFC;
-
-    border: 2px solid #334155;
-
-    border-radius: 14px;
-
-    font-size: 16px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.home-button:hover {
-    border-color: #22D3EE;
-
-    color: #22D3EE;
+.buy-btn.equipped:hover {
+    transform: none;
 }
 
 
-/* ================================
-   Leaderboard
-================================ */
+/* ======================================================
+   ==================== QUIZ GENERAL =====================
+   ====================================================== */
 
-.leaderboard {
-    max-width: 800px;
-
-    margin: 0 auto;
-
-    padding: 60px 20px;
+.quiz-container {
+    animation:
+        quizContainerIn 0.6s ease both;
 }
 
-.leaderboard-header {
-    text-align: center;
-
-    margin-bottom: 35px;
+.info-box {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
 }
 
-.leaderboard-header h1 {
-    margin: 15px 0 10px;
+.info-box:hover {
+    transform: translateY(-3px);
 
-    font-size: 42px;
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
-.leaderboard-header p {
-    color: #94A3B8;
+
+/* ======================================================
+   ==================== QUESTION =========================
+   ====================================================== */
+
+#question-number {
+    animation:
+        questionNumberIn 0.4s ease both;
 }
 
-.leaderboard-list {
+#question {
+    animation:
+        questionIn 0.4s ease both;
+}
+
+
+/* ======================================================
+   ================= ANSWER BUTTONS ======================
+   ====================================================== */
+
+.answer-btn {
+    position: relative;
+
+    overflow: hidden;
+
+    animation:
+        answerIn 0.35s ease both;
+}
+
+.answer-btn:nth-child(1) {
+    animation-delay: 0.04s;
+}
+
+.answer-btn:nth-child(2) {
+    animation-delay: 0.08s;
+}
+
+.answer-btn:nth-child(3) {
+    animation-delay: 0.12s;
+}
+
+.answer-btn:nth-child(4) {
+    animation-delay: 0.16s;
+}
+
+.answer-btn:hover {
+    transform:
+        translateX(-4px)
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 22px rgba(34, 211, 238, 0.12);
+}
+
+.answer-btn:active {
+    transform: scale(0.98);
+}
+
+.answer-btn.correct {
+    animation:
+        correctAnswer 0.55s ease;
+}
+
+.answer-btn.wrong {
+    animation:
+        wrongAnswer 0.45s ease;
+}
+
+
+/* ======================================================
+   ======================= TIMER =========================
+   ====================================================== */
+
+#timer.timer-warning {
+    color: #EF4444;
+
+    animation:
+        timerPulse 0.8s ease-in-out infinite;
+}
+
+
+/* ======================================================
+   ======================= HEARTS =========================
+   ====================================================== */
+
+#hearts.heart-lost {
+    animation:
+        heartLost 0.45s ease;
+}
+
+
+/* ======================================================
+   ======================= COMBO =========================
+   ====================================================== */
+
+#combo.combo-pop {
+    animation:
+        comboPop 0.45s ease;
+}
+
+
+/* ======================================================
+   ======================== TOAST =========================
+   ====================================================== */
+
+#tofaa-toast-container {
+    position: fixed;
+
+    top: 25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 99999;
+
     display: flex;
 
     flex-direction: column;
 
-    gap: 15px;
-}
-
-.player {
-    display: flex;
-
     align-items: center;
 
-    gap: 20px;
+    gap: 10px;
 
-    padding: 20px;
+    pointer-events: none;
+}
+
+.tofaa-toast {
+    min-width: 220px;
+
+    max-width: 90vw;
+
+    padding: 13px 20px;
 
     background: #1E293B;
 
+    color: #F8FAFC;
+
     border: 1px solid #29384F;
 
-    border-radius: 18px;
+    border-radius: 14px;
 
-    transition: 0.2s;
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.35);
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    direction: rtl;
+
+    animation:
+        toastIn 0.35s ease forwards;
 }
 
-.player:hover {
-    transform: translateY(-3px);
+.tofaa-toast.success {
+    border-color: #22C55E;
+}
 
+.tofaa-toast.error {
+    border-color: #EF4444;
+}
+
+.tofaa-toast.vip {
     border-color: #7C3AED;
 }
 
-.rank {
-    width: 45px;
-
-    font-size: 24px;
-
-    text-align: center;
+.tofaa-toast.coin {
+    border-color: #FBBF24;
 }
 
-.player-info {
-    flex: 1;
+.tofaa-toast.hide {
+    animation:
+        toastOut 0.3s ease forwards;
 }
 
-.player-info h3 {
-    margin: 0 0 5px;
 
-    font-size: 20px;
-}
+/* ======================================================
+   ===================== COIN POP =========================
+   ====================================================== */
 
-.player-info span {
-    color: #94A3B8;
+.coin-pop {
+    position: fixed;
 
-    font-size: 14px;
-}
+    z-index: 99998;
 
-.player strong {
-    color: #22D3EE;
+    color: #FBBF24;
 
     font-size: 18px;
-}
 
-.first {
-    border: 2px solid #FACC15;
-}
+    font-weight: 900;
 
-.second {
-    border: 2px solid #CBD5E1;
-}
+    pointer-events: none;
 
-.third {
-    border: 2px solid #CD7F32;
+    animation:
+        coinPop 0.9s ease forwards;
 }
 
 
-/* ================================
-   Profile
-================================ */
+/* ======================================================
+   ===================== DAILY ============================
+   ====================================================== */
 
-.profile-page {
-    max-width: 700px;
-
-    margin: 0 auto;
-
-    padding: 60px 20px;
-
-    text-align: center;
+.daily-card {
+    animation:
+        dailyCardIn 0.5s ease both;
 }
 
-.profile-icon {
-    width: 100px;
-    height: 100px;
+.daily-play-btn:hover {
+    transform: translateY(-2px);
 
-    margin: 0 auto 20px;
+    box-shadow:
+        0 8px 25px rgba(124, 58, 237, 0.25);
+}
 
-    display: flex;
+.daily-completed {
+    opacity: 0.85;
+}
 
-    align-items: center;
-    justify-content: center;
 
-    background: #7C3AED;
+/* ======================================================
+   ===================== RESULT ===========================
+   ====================================================== */
+
+.result-screen {
+    animation:
+        resultIn 0.6s ease both;
+}
+
+.result-screen h1 {
+    animation:
+        resultTitle 0.7s ease 0.1s both;
+}
+
+.result-screen h2,
+.result-screen h3 {
+    animation:
+        resultStatsIn 0.5s ease both;
+}
+
+.result-screen h2 {
+    animation-delay: 0.15s;
+}
+
+.result-screen h3:nth-of-type(1) {
+    animation-delay: 0.22s;
+}
+
+.result-screen h3:nth-of-type(2) {
+    animation-delay: 0.29s;
+}
+
+.result-screen h3:nth-of-type(3) {
+    animation-delay: 0.36s;
+}
+
+.result-screen h3:nth-of-type(4) {
+    animation-delay: 0.43s;
+}
+
+.result-btn {
+    position: relative;
+
+    overflow: hidden;
+}
+
+.result-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(124, 58, 237, 0.25);
+}
+
+.result-btn:active {
+    transform: scale(0.98);
+}
+
+
+/* ======================================================
+   ====================== VIP =============================
+   ====================================================== */
+
+.vip-result {
+    animation:
+        vipIn 0.6s ease both;
+}
+
+.vip-result:hover {
+    box-shadow:
+        0 0 30px rgba(124, 58, 237, 0.18);
+}
+
+
+/* ======================================================
+   ================= DAILY RESULT =========================
+   ====================================================== */
+
+.daily-result {
+    animation:
+        dailyResultIn 0.6s ease both;
+}
+
+
+/* ======================================================
+   ================= BACKGROUND GLOW ======================
+   ====================================================== */
+
+body::before,
+body::after {
+    content: "";
+
+    position: fixed;
+
+    width: 320px;
+    height: 320px;
 
     border-radius: 50%;
 
-    font-size: 45px;
+    pointer-events: none;
+
+    z-index: -1;
+
+    filter: blur(90px);
+
+    opacity: 0.13;
 }
 
-.profile-page h1 {
-    margin: 10px 0;
+body::before {
+    background: #7C3AED;
 
-    font-size: 40px;
+    top: -120px;
+    right: -100px;
+
+    animation:
+        floatingGlow 8s ease-in-out infinite;
 }
 
-.profile-page > p {
-    margin-bottom: 35px;
+body::after {
+    background: #22D3EE;
 
-    color: #94A3B8;
-}
+    bottom: -140px;
+    left: -100px;
 
-.profile-stats {
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 15px;
-}
-
-.profile-stats div {
-    padding: 25px 15px;
-
-    background: #1E293B;
-
-    border: 1px solid #29384F;
-
-    border-radius: 18px;
-}
-
-.profile-stats strong {
-    display: block;
-
-    margin-bottom: 8px;
-
-    color: #22D3EE;
-
-    font-size: 28px;
-}
-
-.profile-stats span {
-    color: #94A3B8;
+    animation:
+        floatingGlow 10s ease-in-out infinite reverse;
 }
 
 
-/* ================================
-   Mobile 📱
-================================ */
+/* ======================================================
+   ===================== ANIMATIONS =======================
+   ====================================================== */
 
-@media (max-width: 700px) {
 
-    header {
+/* Header */
+
+@keyframes headerIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* Hero */
+
+@keyframes heroIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+@keyframes heroTitleIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+@keyframes heroTextIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+@keyframes heroButtonIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* Cards */
+
+@keyframes cardIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* Store */
+
+@keyframes storeHeaderIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+@keyframes storeGridIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+@keyframes productCardIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+@keyframes purchasePop {
+
+    0% {
+        transform: scale(0.95);
+    }
+
+    50% {
+        transform: scale(1.04);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* Background */
+
+@keyframes floatingGlow {
+
+    0%,
+    100% {
+        transform:
+            translate(0, 0)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(25px, -20px)
+            scale(1.12);
+    }
+
+}
+
+
+/* Quiz */
+
+@keyframes quizContainerIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+@keyframes questionNumberIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+@keyframes questionIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateX(0);
+    }
+
+}
+
+@keyframes answerIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(12px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* Correct */
+
+@keyframes correctAnswer {
+
+    0% {
+        transform: scale(1);
+    }
+
+    35% {
+        transform: scale(1.04);
+    }
+
+    65% {
+        transform: scale(0.98);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* Wrong */
+
+@keyframes wrongAnswer {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-8px);
+    }
+
+    40% {
+        transform: translateX(8px);
+    }
+
+    60% {
+        transform: translateX(-5px);
+    }
+
+    80% {
+        transform: translateX(5px);
+    }
+
+}
+
+
+/* Timer */
+
+@keyframes timerPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform:
+            scale(1.12);
+
+        opacity: 0.7;
+    }
+
+}
+
+
+/* Heart */
+
+@keyframes heartLost {
+
+    0% {
+        transform: scale(1);
+    }
+
+    35% {
+        transform: scale(1.25);
+    }
+
+    60% {
+        transform:
+            scale(0.9)
+            rotate(-5deg);
+    }
+
+    80% {
+        transform:
+            scale(1.08)
+            rotate(5deg);
+    }
+
+    100% {
+        transform:
+            scale(1)
+            rotate(0);
+    }
+
+}
+
+
+/* Combo */
+
+@keyframes comboPop {
+
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.22);
+    }
+
+    70% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* Toast */
+
+@keyframes toastIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-20px)
+            scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+@keyframes toastOut {
+
+    from {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    to {
+        opacity: 0;
+
+        transform:
+            translateY(-15px)
+            scale(0.95);
+    }
+
+}
+
+
+/* Coin */
+
+@keyframes coinPop {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(10px)
+            scale(0.7);
+    }
+
+    20% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1.15);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateY(-45px)
+            scale(1);
+    }
+
+}
+
+
+/* Daily */
+
+@keyframes dailyCardIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* Result */
+
+@keyframes resultIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+@keyframes resultTitle {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px)
+            scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+@keyframes resultStatsIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateX(0);
+    }
+
+}
+
+
+/* VIP */
+
+@keyframes vipIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.9);
+    }
+
+    60% {
+        transform:
+            scale(1.03);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+
+}
+
+
+/* Daily Result */
+
+@keyframes dailyResultIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px)
+            scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* ======================================================
+   ===================== MOBILE ==========================
+   ====================================================== */
+
+@media (max-width: 1000px) {
+
+    .store-products {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .header {
         flex-direction: column;
 
-        padding: 18px;
+        gap: 20px;
     }
 
     nav {
@@ -765,64 +1657,216 @@ footer p {
         justify-content: center;
     }
 
-    nav a,
-    .profile {
-        font-size: 14px;
-    }
-
-
-    .hero {
-        min-height: 450px;
-    }
-
     .hero h1 {
-        font-size: 36px;
+        font-size: 35px;
     }
 
     .hero p {
-        font-size: 16px;
+        font-size: 17px;
     }
-
 
     .challenge-grid {
         grid-template-columns: 1fr;
     }
 
+}
 
-    .quiz-top {
-        grid-template-columns: repeat(2, 1fr);
+
+@media (max-width: 600px) {
+
+    .store {
+        padding:
+            40px 20px 60px;
     }
 
-    .quiz-card {
-        padding: 25px 18px;
+    .store-header h1 {
+        font-size: 32px;
     }
 
-    #question {
-        font-size: 25px;
-    }
-
-    .answers {
+    .store-products {
         grid-template-columns: 1fr;
     }
 
-
-    .leaderboard-header h1 {
-        font-size: 34px;
+    .challenge-card:hover,
+    .product-card:hover {
+        transform:
+            translateY(-4px);
     }
 
-    .player {
-        padding: 15px;
+    #tofaa-toast-container {
+        top: 15px;
 
-        gap: 10px;
+        width: 100%;
+
+        padding:
+            0 12px;
     }
 
-    .player strong {
+    .tofaa-toast {
+        width: 100%;
+
+        max-width: 360px;
+
+        padding:
+            12px 15px;
+
+        font-size: 13px;
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .hero p {
         font-size: 15px;
     }
 
+    .start-btn {
+        padding:
+            14px 25px;
 
-    .profile-stats {
-        grid-template-columns: 1fr;
+        font-size: 16px;
+    }
+
+    .challenge-card {
+        padding: 22px 16px;
+    }
+
+    .product-card {
+        padding: 24px 16px;
+    }
+
+}
+
+
+/* ======================================================
+   ================ REDUCED MOTION =======================
+   ====================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+
+}
+/* =========================
+   SOCIAL LOGIN
+========================= */
+
+.social-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0 18px;
+    color: #64748B;
+    font-size: 12px;
+}
+
+.social-divider::before,
+.social-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #334155;
+}
+
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.social-btn {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid #334155;
+    border-radius: 13px;
+    padding: 12px 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.2s;
+
+    color: #F8FAFC;
+}
+
+.social-btn:hover {
+    transform: translateY(-2px);
+}
+
+.social-icon {
+    width: 24px;
+    font-size: 20px;
+    font-weight: 900;
+    text-align: center;
+}
+
+/* Google */
+
+.google-btn {
+    background: #F8FAFC;
+    color: #111827;
+}
+
+.google-btn:hover {
+    background: #FFFFFF;
+    box-shadow: 0 8px 25px rgba(255,255,255,0.08);
+}
+
+/* Facebook */
+
+.facebook-btn {
+    background: #1877F2;
+    border-color: #1877F2;
+}
+
+.facebook-btn:hover {
+    background: #166FE5;
+    box-shadow: 0 8px 25px rgba(24,119,242,0.25);
+}
+
+/* Apple */
+
+.apple-btn {
+    background: #000000;
+    border-color: #000000;
+}
+
+.apple-btn:hover {
+    background: #111111;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+}
+
+@media (max-width: 500px) {
+
+    .social-btn {
+        min-height: 46px;
+        font-size: 13px;
     }
 
 }

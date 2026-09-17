@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>المتجر - Tofaa Quiz</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="logo">
+            Tofaa <span>Quiz</span>
+        </div>
+
+        <nav>
+            <a href="index.html">الرئيسية</a>
+            <a href="quiz.html">ابدأ الاختبار</a>
+            <a href="leaderboard.html">المتصدرين</a>
+            <a href="profile.html">الملف الشخصي</a>
+            <a href="store.html" class="store-link">🛒 المتجر</a>
+        </nav>
+
+    </header>
+
+
+    <!-- ================= STORE ================= -->
+
+    <main class="store">
+
+        <section class="store-header">
+
+            <h1>🛒 متجر Tofaa Quiz</h1>
+
+            <p>
+                استخدم عملاتك لشراء العناصر المميزة
+            </p>
+
+            <div class="coins-box">
+
+                🪙
+
+                <span id="coins">0</span>
+
+                عملة
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PRODUCTS ================= -->
+
+        <section class="store-products">
+
+
+            <!-- ================= PRODUCT 1 ================= -->
+
+            <div class="product-card">
+
+                <div class="product-icon">
+                    🎨
+                </div>
+
+                <h2>
+                    إطار بنفسجي
+                </h2>
+
+                <p>
+                    إطار مميز لملفك الشخصي
+                </p>
+
+                <div class="product-price">
+                    🪙 100
+                </div>
+
+                <button
+                    class="buy-btn"
+                    data-product-id="purple-frame"
+                    data-price="100"
+                    onclick="buyProduct('purple-frame', 100)"
+                >
+                    شراء
+                </button>
+
+            </div>
+
+
+            <!-- ================= PRODUCT 2 ================= -->
+
+            <div class="product-card">
+
+                <div class="product-icon">
+                    👑
+                </div>
+
+                <h2>
+                    شارة الملك
+                </h2>
+
+                <p>
+                    شارة خاصة تظهر بجانب اسمك
+                </p>
+
+                <div class="product-price">
+                    🪙 250
+                </div>
+
+                <button
+                    class="buy-btn"
+                    data-product-id="king-badge"
+                    data-price="250"
+                    onclick="buyProduct('king-badge', 250)"
+                >
+                    شراء
+                </button>
+
+            </div>
+
+
+            <!-- ================= PRODUCT 3 ================= -->
+
+            <div class="product-card">
+
+                <div class="product-icon">
+                    ⚡
+                </div>
+
+                <h2>
+                    شارة البرق
+                </h2>
+
+                <p>
+                    أظهر سرعتك وتميزك في المسابقات
+                </p>
+
+                <div class="product-price">
+                    🪙 400
+                </div>
+
+                <button
+                    class="buy-btn"
+                    data-product-id="lightning-badge"
+                    data-price="400"
+                    onclick="buyProduct('lightning-badge', 400)"
+                >
+                    شراء
+                </button>
+
+            </div>
+
+
+            <!-- ================= PRODUCT 4 ================= -->
+
+            <div class="product-card">
+
+                <div class="product-icon">
+                    💎
+                </div>
+
+                <h2>
+                    عضوية المميز
+                </h2>
+
+                <p>
+                    عنصر مميز للاعبين المتفوقين
+                </p>
+
+                <div class="product-price">
+                    🪙 750
+                </div>
+
+                <button
+                    class="buy-btn"
+                    data-product-id="vip"
+                    data-price="750"
+                    onclick="buyProduct('vip', 750)"
+                >
+                    شراء
+                </button>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        ©️ 2026 Tofaa Quiz - جميع الحقوق محفوظة
+
+    </footer>
+
+
+    <!-- ================= FIREBASE ================= -->
+
+    <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
+
+    <script src="firebase.js"></script>
+
+
+    <!-- ================= STORE SYSTEM ================= -->
+
+    <script>
+
+        // ==================================================
+        // المتغيرات
+        // ==================================================
+
+        const coinsElement =
+            document.getElementById("coins");
+
+        let currentUser = null;
+        let userCoins = 0;
+        // المنتجات المفعّلة حاليًا
+        let equippedItems = {}; 
+
+        
+
+
+        // ==================================================
+        // تسجيل الدخول وتحميل البيانات
+        // ==================================================
+
+        firebase.auth().onAuthStateChanged(
+            async (user) => {
+
+                if (!user) {
+
+                    currentUser = null;
+
+                    userCoins = 0;
+
+                    updateCoins();
+
+                    return;
+                }
+
+
+                currentUser = user;
+
+
+                try {
+
+                    const userRef =
+                        db
+                            .collection("users")
+                            .doc(user.uid);
+
+
+                    const userDoc =
+                        await userRef.get();
+
+
+                    if (userDoc.exists) {
+
+                       const data =
+                      userDoc.data();
+
+                      userCoins =
+                      Number(data.coins) || 0;
+
+                      // تحميل المنتجات المفعّلة
+                       equippedItems =
+                        data.equippedItems || {}; 
+
+                    } else {
+
+                        userCoins = 0;
+
+
+                        await userRef.set(
+                            {
+                                coins: 0
+                            },
+                            {
+                                merge: true
+                            }
+                        );
+
+                    }
+
+
+                    updateCoins();
+
+
+                    // تحميل المشتريات
+                    await checkPurchasedProducts();
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "❌ خطأ في تحميل بيانات المستخدم:",
+                        error
+                    );
+
+                    userCoins = 0;
+
+                    updateCoins();
+
+                }
+
+            }
+        );
+
+
+        // ==================================================
+        // تحديث العملات
+        // ==================================================
+
+        function updateCoins() {
+
+            if (!coinsElement) {
+                return;
+            }
+
+            coinsElement.textContent =
+                userCoins.toLocaleString("en-US");
+
+        }
+
+
+        // ==================================================
+        // شراء منتج
+        // ==================================================
+
+        async function buyProduct(
+            productId,
+            price
+        ) {
+
+            // ==================================================
+            // التأكد من تسجيل الدخول
+            // ==================================================
+
+            if (!currentUser) {
+
+                alert(
+                    "🔐 يجب تسجيل الدخول أولًا لشراء المنتجات."
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return;
+            }
+
+
+            // ==================================================
+            // التأكد من السعر
+            // ==================================================
+
+            price =
+                Number(price);
+
+
+            if (
+                !Number.isFinite(price) ||
+                price <= 0
+            ) {
+
+                console.error(
+                    "❌ سعر المنتج غير صحيح:",
+                    price
+                );
+
+                alert(
+                    "حدث خطأ في سعر المنتج."
+                );
+
+                return;
+            }
+
+
+            // ==================================================
+            // التأكد من العملات الموجودة حاليًا
+            // ==================================================
+
+            if (userCoins < price) {
+
+                alert(
+                    `❌ ليس لديك عملات كافية.\n\nرصيدك الحالي: ${userCoins} 🪙\nسعر المنتج: ${price} 🪙`
+                );
+
+                return;
+            }
+
+
+            const userRef =
+                db
+                    .collection("users")
+                    .doc(currentUser.uid);
+
+
+            const purchaseRef =
+                userRef
+                    .collection("purchases")
+                    .doc(productId);
+
+
+            try {
+
+                // ==================================================
+                // Transaction
+                // ==================================================
+
+                await db.runTransaction(
+                    async (transaction) => {
+
+                        // قراءة بيانات المستخدم
+                        const userDoc =
+                            await transaction.get(
+                                userRef
+                            );
+
+
+                        if (!userDoc.exists) {
+
+                            throw new Error(
+                                "USER_NOT_FOUND"
+                            );
+                        }
+
+
+                        // قراءة المنتج
+                        const purchaseDoc =
+                            await transaction.get(
+                                purchaseRef
+                            );
+
+
+                        // ==================================================
+                        // منع شراء المنتج مرتين
+                        // ==================================================
+
+                        if (purchaseDoc.exists) {
+
+                            throw new Error(
+                                "ALREADY_PURCHASED"
+                            );
+                        }
+
+
+                        const data =
+                            userDoc.data() || {};
+
+
+                        const currentCoins =
+                            Number(data.coins) || 0;
+
+
+                        // ==================================================
+                        // التأكد من الرصيد الحقيقي
+                        // ==================================================
+
+                        if (
+                            currentCoins < price
+                        ) {
+
+                            throw new Error(
+                                "NOT_ENOUGH_COINS"
+                            );
+                        }
+
+
+                        // ==================================================
+                        // خصم العملات
+                        // ==================================================
+
+                        transaction.update(
+                            userRef,
+                            {
+                                coins:
+                                    currentCoins -
+                                    price
+                            }
+                        );
+
+
+                        // ==================================================
+                        // حفظ عملية الشراء
+                        // ==================================================
+
+                        transaction.set(
+                            purchaseRef,
+                            {
+
+                                productId:
+                                    productId,
+
+                                price:
+                                    price,
+
+                                purchasedAt:
+                                    firebase
+                                        .firestore
+                                        .FieldValue
+                                        .serverTimestamp()
+
+                            }
+                        );
+
+                    }
+                );
+
+
+                // ==================================================
+                // تحديث الرصيد على الشاشة
+                // ==================================================
+
+                userCoins -= price;
+
+                updateCoins();
+              // تفعيل المنتج تلقائيًا بعد الشراء
+               if (productId !== "vip") {
+              equippedItems[productId] = true;
+
+                await userRef.set(
+        {
+            equippedItems: equippedItems
+        },
+        {
+            merge: true
+        }
+    );
+}
+
+                // ==================================================
+                // تحديث زر المنتج
+                // ==================================================
+
+                const button =
+                    document.querySelector(
+                        `.buy-btn[data-product-id="${productId}"]`
+                    );
+
+
+                // VIP لا يحتاج Equip
+if (productId === "vip") {
+
+    button.textContent =
+        "✓ تم الشراء";
+
+    button.disabled =
+        true;
+
+    button.classList.add(
+        "purchased"
+    );
+
+} else {
+
+    // المنتجات العادية تحتاج Equip
+    updateProductButton(
+        productId
+    );
+}
+
+                    
+
+                // ==================================================
+                // تأثير نجاح الشراء
+                // ==================================================
+
+                showPurchaseEffect();
+
+
+                alert(
+                    "🎉 تم شراء المنتج بنجاح!"
+                );
+
+
+                // ==================================================
+                // 💎 لو المنتج VIP
+                // ==================================================
+
+                if (productId === "vip") {
+
+                    alert(
+                        "💎 مبروك! تم تفعيل عضوية VIP على حسابك."
+                    );
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "❌ خطأ أثناء الشراء:",
+                    error
+                );
+
+
+                if (
+                    error.message ===
+                    "NOT_ENOUGH_COINS"
+                ) {
+
+                    alert(
+                        "❌ ليس لديك عملات كافية."
+                    );
+
+                }
+
+                else if (
+                    error.message ===
+                    "ALREADY_PURCHASED"
+                ) {
+
+                    alert(
+                        "✅ أنت تمتلك هذا المنتج بالفعل."
+                    );
+
+                    await checkPurchasedProducts();
+
+                }
+
+                else if (
+                    error.message ===
+                    "USER_NOT_FOUND"
+                ) {
+
+                    alert(
+                        "❌ لم يتم العثور على حسابك."
+                    );
+
+                }
+
+                else {
+
+                    alert(
+                        "❌ حدث خطأ أثناء عملية الشراء. حاول مرة أخرى."
+                    );
+
+                }
+
+            }
+
+        }
+
+
+        // ==================================================
+        // فحص المنتجات المشتراة
+        // ==================================================
+
+        async function checkPurchasedProducts() {
+
+            if (!currentUser) {
+                return;
+            }
+
+
+            const buttons =
+                document.querySelectorAll(
+                    ".buy-btn"
+                );
+
+
+            for (const button of buttons) {
+
+                const productId =
+                    button.dataset.productId;
+
+
+                if (!productId) {
+                    continue;
+                }
+
+
+                try {
+
+                    const purchaseRef =
+                        db
+                            .collection("users")
+                            .doc(currentUser.uid)
+                            .collection("purchases")
+                            .doc(productId);
+
+
+                    const purchaseDoc =
+                        await purchaseRef.get();
+
+
+                    if (
+                        purchaseDoc.exists
+                    ) {
+
+                        button.textContent =
+                            "✓ تم الشراء";
+
+                        button.disabled =
+                            true;
+
+                        button.classList.add(
+                            "purchased"
+                        );
+
+                    }
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        `❌ خطأ في فحص المنتج ${productId}:`,
+                        error
+                    );
+
+                }
+
+            }
+
+        }
+
+
+        // ==================================================
+        // ✨ تأثير نجاح الشراء
+        // ==================================================
+
+        function showPurchaseEffect() {
+
+            if (
+                document.getElementById(
+                    "purchase-effect-style"
+                )
+            ) {
+                return;
+            }
+
+
+            const style =
+                document.createElement(
+                    "style"
+                );
+
+
+            style.id =
+                "purchase-effect-style";
+
+
+            style.textContent = `
+
+                .purchase-success {
+
+                    position: fixed;
+
+                    top: 50%;
+
+                    left: 50%;
+
+                    transform:
+                        translate(-50%, -50%)
+                        scale(0.7);
+
+                    background:
+                        #1E293B;
+
+                    border:
+                        1px solid #22D3EE;
+
+                    color:
+                        #F8FAFC;
+
+                    padding:
+                        22px 30px;
+
+                    border-radius:
+                        18px;
+
+                    font-size:
+                        22px;
+
+                    font-weight:
+                        bold;
+
+                    z-index:
+                        99999;
+
+                    box-shadow:
+                        0 15px 50px
+                        rgba(0,0,0,0.45);
+
+                    opacity:
+                        0;
+
+                    animation:
+                        purchaseSuccess 1.4s
+                        ease forwards;
+
+                    pointer-events:
+                        none;
+                }
+
+
+                @keyframes purchaseSuccess {
+
+                    0% {
+
+                        opacity:
+                            0;
+
+                        transform:
+                            translate(-50%, -50%)
+                            scale(0.7);
+                    }
+
+
+                    20% {
+
+                        opacity:
+                            1;
+
+                        transform:
+                            translate(-50%, -50%)
+                            scale(1.05);
+                    }
+
+
+                    70% {
+
+                        opacity:
+                            1;
+
+                        transform:
+                            translate(-50%, -50%)
+                            scale(1);
+                    }
+
+
+                    100% {
+
+                        opacity:
+                            0;
+
+                        transform:
+                            translate(-50%, -50%)
+                            scale(0.95);
+                    }
+
+                }
+
+            `;
+
+
+            document.head.appendChild(
+                style
+            );
+
+
+            const effect =
+                document.createElement(
+                    "div"
+                );
+
+
+            effect.className =
+                "purchase-success";
+
+
+            effect.textContent =
+                "🎉 تم الشراء بنجاح!";
+
+
+            document.body.appendChild(
+                effect
+            );
+
+
+            setTimeout(
+                () => {
+
+                    effect.remove();
+
+                },
+                1500
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>
